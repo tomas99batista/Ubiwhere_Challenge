@@ -2,7 +2,7 @@
 
 ## How to install
 
-`$ virtualenv -p python3 venv`
+`$ python3 -m venv env`
 
 `$ source ./venv/bin/activate`
 
@@ -16,6 +16,5 @@
 ### Run Compose
 `docker-compose up -d`
 
-### Criar Postgres DB
-
-`docker run --name postgres_ubi_chall -d -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -d postgres`
+### Criar Postgis DB
+`docker run --name=postgis -d -e POSTGRES_USER=postgis -e POSTGRES_PASS=postgis -e POSTGRES_DBNAME=postgis -p 5432:5432 kartoza/postgis:9.6-2.4`
