@@ -18,4 +18,4 @@
 
 ### Criar Postgres DB
 
-`docker run --name postgres_ubi_chall -d -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -d postgres`
+` docker run --name postgis_ubi_chall -d -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -d postgis/postgis`
