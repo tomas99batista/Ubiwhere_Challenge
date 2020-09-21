@@ -13,7 +13,7 @@ class Occurence(models.Model):
     # PostGis
     # https://www.youtube.com/watch?v=vesf9A2PA44&ab_channel=PeterFlynn
     # https://www.youtube.com/watch?v=ymOdTSKRQBs&ab_channel=BlackManSkill
-    geographic_location = models.TextField()
+    geographic_location = models.PointField()
     
     # Django Auth
     author = models.ForeignKey(User, on_delete=models.CASCADE)
