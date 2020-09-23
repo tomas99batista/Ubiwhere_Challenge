@@ -128,3 +128,4 @@ STATIC_URL = '/static/'
 
 APPEND_SLASH = False
 
+STATIC_ROOT = os.path.join('.', 'static')
