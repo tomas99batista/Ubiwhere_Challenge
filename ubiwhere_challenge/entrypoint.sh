@@ -1,14 +1,14 @@
-#!/bin/bash
+#!/bin/sh
 
-if [ "$DATABAS" = "postgis" ]
+if [ "$DATABASE" = "postgis" ]
 then
     echo "Waiting for postgis..."
 
     while ! nc -z $SQL_HOST $SQL_PORT; do
-        sleep 0.1
+      sleep 0.1
     done
 
-    echo "Postgis started"
+    echo "postgis started"
 fi
 
 python manage.py flush --no-input
