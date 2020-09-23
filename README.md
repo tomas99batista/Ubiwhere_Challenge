@@ -1,13 +1,5 @@
 # Ubiwhere_Challenge
 
-## How to install
-
-`$ python3 -m venv env`
-
-`$ source ./venv/bin/activate`
-
-`$ pip3 install -r requirements.txt`
-
 ## Docker
 
 ### Build Compose 
