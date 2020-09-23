@@ -16,5 +16,13 @@
 ### Run Compose
 `docker-compose up -d`
 
+`docker-compose up -d --build`
+
+### Clear containers
+`docker-compose down -v`
+
+### Run with specific .yml
+`docker-compose -f docker-compose.yml up --build`
+
 ### Criar Postgis DB
-`docker run --name=postgis -d -e POSTGRES_USER=postgis -e POSTGRES_PASS=postgis -e POSTGRES_DBNAME=postgis -p 5432:5432 kartoza/postgis:9.6-2.4`
+`docker run --name=postgres -d -e POSTGRES_USER=postgres -e POSTGRES_PASS=postgres -e POSTGRES_DBNAME=postgres -p 5432:5432 mdillon/postgis`
