@@ -5,3 +5,5 @@ djangorestframework-gis
 markdown
 django-filter
 gunicorn
+django-cors-headers
+djangorestframework_simplejwt

@@ -1,7 +1,7 @@
 from django.contrib.gis.db import models
 from django.contrib.auth.models import User
 
-class Occurence(models.Model):
+class Occurrence(models.Model):
 
     class State(models.TextChoices):
         TO_VALIDATE = 'To Validate'
@@ -16,7 +16,7 @@ class Occurence(models.Model):
         ROAD_CONDITION = 'Road Condition'           # Road states that affect those who drive on them (degraded pavement, holes, etc.).
 
     # ID
-    occurence_id = models.AutoField(primary_key=True)
+    occurrence_id = models.AutoField(primary_key=True)
     
     # Description with no chars limit
     description = models.TextField(null=False, blank=True)
@@ -27,7 +27,7 @@ class Occurence(models.Model):
     geographic_location = models.PointField(blank=True)
     
     # Django Auth
-    #author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     
     # Timestamps of creation and update
     creation_timestamp = models.DateTimeField(auto_now_add=True)
@@ -48,5 +48,4 @@ class Occurence(models.Model):
     )
 
     def __str__(self):
-        # , Author: {self.author.email}
-        return f"ID: {self.occurence_id}, Description: {self.description}, Location: {self.geographic_location}, State: {self.get_state_display()}, Category: {self.get_category_display()}, Creation: {self.creation_timestamp}, Update: {self.update_timestamp}"
+        return f"ID: {self.occurrence_id}, Description: {self.description}, Location: {self.geographic_location}, Author: {self.author.username}, State: {self.get_state_display()}, Category: {self.get_category_display()}, Creation: {self.creation_timestamp}, Update: {self.update_timestamp}"
