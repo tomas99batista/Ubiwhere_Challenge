@@ -5,3 +5,5 @@
 # TODO: Documentação código
 # TODO: tests.py
 # TODO: README.md (Comandos a usar, etc, por tudo bonito)
+# TODO: Docker PROD; Gunicorn, etc
+# TODO: VER O CODACY E REMOVER LIXO E TRALHA DE LÁ
