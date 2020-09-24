@@ -21,7 +21,7 @@ class Occurence(models.Model):
     # Description with no chars limit
     description = models.TextField(null=False, blank=True)
     
-    # PostGis
+    # PostGis POINT(X Y)
     # https://www.youtube.com/watch?v=vesf9A2PA44&ab_channel=PeterFlynn
     # https://www.youtube.com/watch?v=ymOdTSKRQBs&ab_channel=BlackManSkill
     geographic_location = models.PointField(blank=True)
@@ -29,16 +29,18 @@ class Occurence(models.Model):
     # Django Auth
     #author = models.ForeignKey(User, on_delete=models.CASCADE)
     
-    # Timestamps
+    # Timestamps of creation and update
     creation_timestamp = models.DateTimeField(auto_now_add=True)
     update_timestamp = models.DateTimeField(auto_now=True)
     
     # Enums    
+    # State (To Validate, Validated, Solved)
     state = models.CharField(
         max_length=18,
         choices=State.choices,
         default=State.TO_VALIDATE
     )
+    # Category (Construction, Special Event, Incident, Wheather Condition, Road Condition)
     category = models.CharField(
         max_length=18,
         choices=Category.choices,
@@ -47,5 +49,4 @@ class Occurence(models.Model):
 
     def __str__(self):
         # , Author: {self.author.email}
-        return f"ID: {self.occurence_id}, Description: {self.description}, Location: {self.geographic_location},\
-            State: {self.get_state_display()}, Category: {self.get_category_display()}, Creation: {self.creation_timestamp}, Update: {self.update_timestamp}"
+        return f"ID: {self.occurence_id}, Description: {self.description}, Location: {self.geographic_location}, State: {self.get_state_display()}, Category: {self.get_category_display()}, Creation: {self.creation_timestamp}, Update: {self.update_timestamp}"

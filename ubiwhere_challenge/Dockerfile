@@ -6,7 +6,8 @@ WORKDIR /usr/src/app
 
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+    # when set to 1 removes prints (stdout)
+ENV PYTHONUNBUFFERED 1 
 
 # install psycopg2 dependencies
 RUN apk update \
