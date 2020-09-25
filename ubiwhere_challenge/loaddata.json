@@ -1,5 +1,16 @@
 [
     {
+      "pk" : 1,
+      "model" : "auth.user",
+      "fields": {
+          "username" : "admin",
+          "password" : "admin",
+          "email" : "admin@example.com",
+          "is_superuser" : true
+      }
+    },
+
+    {
         "pk" : 2,
         "model" : "auth.user",
         "fields": {

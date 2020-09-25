@@ -1,7 +1,172 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block content %}
+{% load static %}
 
-    <h1>Index, Welcome</h1>
+<head>
+    <meta charset="UTF-8">
 
-{% endblock content %}
+    <!-- Title Page-->
+    <title>Ubiwhere Challenge</title>
+
+    <!-- Bootstrap CSS-->
+    <link href="{% static 'vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
+
+<style>
+    .title-page{
+        font-family: sans-serif;
+        padding: 10px;
+        margin-left: 250px;
+    }
+    .styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.styled-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.styled_th {
+    font-weight: bold;
+    color: #009879;
+}
+</style>
+
+</head>
+
+<body>
+
+    <div class="content">
+        <h1 class="title-page"> Ubiwhere Challenge </h1>
+
+        <center>
+        <table class="styled-table" >
+            <thead>
+                <tr>
+                    <th>Action</th>
+                    <th>Method</th>
+                    <th>Endpoint</th>
+                    <th>Params</th>
+                    <th>Return</th>              
+                    <th>Permission</th>              
+                </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="styled_th">Add New Occurrence</td>
+                <td>POST</td>
+                <td>api/occurrence/</td>
+                <td>Occurrence</td>
+                <td>Occurrence Created</td>
+                <td>IsAuthenticated</td>
+            </tr>
+            <tr>
+                <td class="styled_th">Update Occurrence</td>
+                <td>PATCH</td>
+                <td>api/occurrence/int:pk/</td>
+                <td>Occurrence.state updated value</td>
+                <td>Occurrence Updated</td>
+                <td>IsAuthenticated + IsSuperUser</td>
+            </tr>
+            <tr>
+                <td class="styled_th">Delete Occurrence</td>
+                <td>DELETE</td>
+                <td>api/occurrence/int:pk/</td>
+                <td>Occurrence ID</td>
+                <td>---</td>
+                <td>IsAuthenticated + (IsSuperUser | IsOccurrenceOwner)</td>
+            </tr>
+            <tr>
+                <td class="styled_th">Get Occurrence By ID</td>
+                <td>GET</td>
+                <td>api/occurrence/int:pk/</td>
+                <td>Occurrence ID</td>
+                <td>Occurrence</td>
+                <td>IsAuthenticated</td>
+            </tr>
+            <tr>
+                <td class="styled_th">Filter Occurrence by author/category/distance</td>
+                <td>GET</td>
+                <td>api/occurrence/filter/</td>
+                <td>Author | Category | Point + Distance Range</td>
+                <td>Occurrences</td>
+                <td>IsAuthenticated</td>
+            </tr>
+            <tr>
+                <td class="styled_th">Get All Occurrences</td>
+                <td>GET</td>
+                <td>api/occurrence/all/</td>
+                <td>---</td>
+                <td>All Occurrences</td>
+                <td>IsAuthenticated</td>
+            </tr>
+            <tr>
+                <td class="styled_th">Login | Retrieve Token</td>
+                <td>POST</td>
+                <td>api/login/</td>
+                <td>Username + Password</td>
+                <td>Authorization Token</td>
+                <td>AllowAny</td>
+            </tr>
+            <tr>
+                <td class="styled_th">Register</td>
+                <td>POST</td>
+                <td>api/register/</td>
+                <td>Username + Password</td>
+                <td>User</td>
+                <td>AllowAny</td>
+            </tr>
+            <tr>
+                <td class="styled_th">Get All Users</td>
+                <td>GET</td>
+                <td>api/users/</td>
+                <td>---</td>
+                <td>Users</td>
+                <td>IsAuthenticated</td>
+            </tr>
+            <tr>
+                <td class="styled_th">Get User By ID</td>
+                <td>GET</td>
+                <td>api/user/int:pk/</td>
+                <td>User ID</td>
+                <td>User</td>
+                <td>IsAuthenticated</td>
+            </tr>
+            <tr>
+                <td class="styled_th">Delete User By ID</td>
+                <td>DELETE</td>
+                <td>api/user/int:pk/</td>
+                <td>User ID</td>
+                <td>---</td>
+                <td>IsAuthenticated + IsSuperUser</td>
+            </tr>
+            <tbody>
+        </table>
+        </center>
+    </div>
+
+</body>
+
+</html>
+<!-- end document-->
