@@ -15,8 +15,9 @@ python manage.py flush --no-input
 python manage.py makemigrations
 python manage.py makemigrations ubiwhere_challenge_app
 python manage.py migrate
-#python manage.py loaddata loaddata.json
+python manage.py loaddata loaddata.json
 echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@example.com', 'admin')" | python manage.py shell
+
 python manage.py collectstatic --no-input --clear
 
 exec "$@"

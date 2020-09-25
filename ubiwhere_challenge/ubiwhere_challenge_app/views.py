@@ -1,5 +1,8 @@
 from django.shortcuts import render
-from rest_framework.decorators import api_view
+from rest_framework.decorators import (
+    api_view,
+    permission_classes
+)
 from rest_framework import status
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
@@ -12,11 +15,16 @@ from .serializers import (
     OccurrenceSerializer,
     OccurrencePatchSerializer,
 )
+from rest_framework.permissions import (
+    IsAuthenticated,
+    AllowAny
+)
 from .models import Occurrence
 
 
 # POST: Add Occurrence
 @api_view(["POST"])
+@permission_classes([IsAuthenticated])
 def add_new_occurrence(request):
     user = request.user
     serializer = OccurrenceCreationSerializer(data=request.data)
@@ -30,6 +38,7 @@ def add_new_occurrence(request):
 # DELETE: Delete given occurrence |
 # GET: Retrieve given Occurrence by ID
 @api_view(["PATCH", "DELETE", "GET"])
+@permission_classes([IsAuthenticated])
 def update_delete_get_occurrence(request, pk):
     if request.method == "PATCH":
         user = request.user
@@ -69,6 +78,7 @@ def update_delete_get_occurrence(request, pk):
 
 # GET: Filter occurrence by author/category/distance to given point
 @api_view(["GET"])
+@permission_classes([IsAuthenticated])
 def filter_occurrences(request):
     queryset = Occurrence.objects.all()
 
@@ -127,6 +137,7 @@ def filter_occurrences(request):
 
 # GET: Get all occurrences
 @api_view(["GET"])
+@permission_classes([IsAuthenticated])
 def get_all_occurrences(request):
     queryset = Occurrence.objects.all()
     serializer = OccurrenceSerializer(queryset, many=True)
@@ -135,6 +146,7 @@ def get_all_occurrences(request):
 
 # POST: Register a new user
 @api_view(["POST"])
+@permission_classes([AllowAny])
 def user_register(request):
     serializer = CreateUserSerializer(data=request.data)
     if serializer.is_valid():
@@ -145,6 +157,7 @@ def user_register(request):
 
 # GET: Returns all users
 @api_view(["GET"])
+@permission_classes([IsAuthenticated])
 def retrieve_all_users(request):
     queryset = User.objects.all()
     serializer = UserSerializer(queryset, many=True)
@@ -154,6 +167,7 @@ def retrieve_all_users(request):
 # GET: Get user by ID |
 # DELETE: Delete given User (by ID) - only allowed by superusers
 @api_view(["GET", "DELETE"])
+@permission_classes([IsAuthenticated])
 def get_delete_user(request, pk):
     if request.method == "DELETE":
         user_request = request.user
@@ -173,7 +187,6 @@ def get_delete_user(request, pk):
         print(user)
         serializer = UserSerializer(user)
         return Response(serializer.data)
-
 
 def index(request):
     params = {}
