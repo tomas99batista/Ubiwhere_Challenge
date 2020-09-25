@@ -1,3 +1,5 @@
+
+# TODO: API ALLOW ANY ALLOW USERS ETC
 # TODO: Criar uns dados de presset, os loaddata.json para os testes à API poderem funcionar sem serem precisos POSTS antes
 # TODO: Postman collection -> DEFINIR VARIABLE DO TOKEN
 # TODO: Página dos endpoints (Postman, Swagger) 
