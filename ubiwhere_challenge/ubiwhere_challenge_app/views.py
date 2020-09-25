@@ -14,7 +14,7 @@ from .serializers import (
 )
 from .models import Occurrence
 
-# Add new Occurrence
+# POST: Add Occurrence
 @api_view(['POST'])
 def add_new_occurrence(request):
     user = request.user
@@ -24,22 +24,42 @@ def add_new_occurrence(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# Update an occurrence
-@api_view(['PATCH'])
-def update_occurrence(request, pk):
-    user = request.user
-    if not user.is_superuser:
-        return Response("Only superusers allowed", status=status.HTTP_400_BAD_REQUEST)
-    occurrence = get_object_or_404(Occurrence.objects.all(), occurrence_id=pk)
-    serializer = OccurrencePatchSerializer(occurrence, data=request.data, partial=True) # set partial=True to update a data partially
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+# PATCH: Update given Occurrence | 
+# DELETE: Delete given occurrence | 
+# GET: Retrieve given Occurrence by ID
+@api_view(['PATCH', 'DELETE', 'GET'])
+def update_delete_get_occurrence(request, pk):
+    if request.method == 'PATCH':
+        user = request.user
+        if not user.is_superuser:
+            return Response("Only superusers are allowed to update occurrences", status=status.HTTP_400_BAD_REQUEST)
+        occurrence = get_object_or_404(Occurrence.objects.all(), occurrence_id=pk)
+        serializer = OccurrencePatchSerializer(occurrence, data=request.data, partial=True) # set partial=True to update a data partially
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    if request.method == 'DELETE':
+        user = request.user
+        occurrence = get_object_or_404(Occurrence.objects.all(), occurrence_id=pk)
+        # Superuser or author can delete instance 
+        if occurrence.author == user or user.is_superuser:
+            occurrence.delete()
+            return Response("Occurrence deleted", status=status.HTTP_204_NO_CONTENT)
+        else:
+            return Response("Only superusers or creators allowed to delete occurrences", status=status.HTTP_400_BAD_REQUEST)
 
-# Filter occurences
+    if request.method == 'GET':
+        occurrence = get_object_or_404(Occurrence.objects.all(), occurrence_id=pk)
+        print(occurrence)
+        serializer = OccurrenceSerializer(occurrence)
+        return Response(serializer.data) 
+
+
+# GET: Filter occurrence by author/category/distance to given point
 @api_view(['GET'])
-def filter_occurences(request):
+def filter_occurrences(request):
     queryset = Occurrence.objects.all()
 
     # Filter by category
@@ -50,7 +70,7 @@ def filter_occurences(request):
     username = request.query_params.get('username', None)
     queryset = queryset.filter(author__username=username) if username is not None else queryset
 
-    # Filter by distance (in m)
+    # Filter by distance
     latitude = request.query_params.get('latitude', None)
     longitude = request.query_params.get('longitude', None)
     distance_range = request.query_params.get('range', None)  
@@ -72,17 +92,20 @@ def filter_occurences(request):
     if not category and not latitude and not longitude and not distance_range and not username:
         return Response("BAD REQUEST: You need to pass at least one type of filter.", status=status.HTTP_400_BAD_REQUEST)                   
 
+    if not queryset:
+        return Response("No data found for the given filters", status=status.HTTP_204_NO_CONTENT)
+
     serializer = OccurrenceSerializer(queryset, many=True)
     return Response(serializer.data) 
 
-# Retrieve all occurrences
+# GET: Get all occurrences
 @api_view(['GET'])
 def get_all_occurrences(request):
     queryset = Occurrence.objects.all()
     serializer = OccurrenceSerializer(queryset, many=True)
     return Response(serializer.data)
 
-# Register User
+# POST: Register a new user
 @api_view(['POST'])
 def user_register(request):
     serializer = CreateUserSerializer(data=request.data)
@@ -91,46 +114,32 @@ def user_register(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# Retrieve All Users
+# GET: Returns all users
 @api_view(['GET'])
 def retrieve_all_users(request):
     queryset = User.objects.all()
     serializer = UserSerializer(queryset, many=True)
     return Response(serializer.data)
 
+# GET: Get user by ID | 
+# DELETE: Delete given User (by ID) - only allowed by superusers
+@api_view(['GET', 'DELETE'])
+def get_delete_user(request, pk):
+    if request.method == 'DELETE':
+        user_request = request.user
+        user_instance = get_object_or_404(User.objects.all(), id=pk)
+        # Superuser or author can delete instance 
+        if user_request.is_superuser:
+            user_instance.delete()
+            return Response("User deleted", status=status.HTTP_204_NO_CONTENT)
+        else:
+            return Response("Only superusers allowed to delete other users", status=status.HTTP_400_BAD_REQUEST)
 
-#class OccurrenceView(APIView):
-#    # POST -> Creation
-#    # TODO: Qdo inserir state ou dar erro ou então passa-lo para normal
-#    def post(self, request):
-#        # Needs to be authenticated to create a new occurrence as he will be the author
-#        permission_classes = (IsAuthenticated,)
-#        serializer = OccurrenceSerializer(data=request.data, author=request.user)
-#        if serializer.is_valid():
-#            serializer.save()
-#            return Response(serializer.data, status=status.HTTP_201_CREATED)
-#        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-#
-#    # PUT -> Update
-#    # TODO: Apenas deixar dar update no state
-#    def put(self, request):
-#        # Needs to be the owner in order to change the occurrence
-#        permission_classes = (IsOwner,)
-#        occurrence = get_object_or_404(Occurrence.objects.all(), occurrence_id=self.request.data.get('occurrence_id'))
-#        serializer = OccurrenceSerializer(occurrence, data=request.data)
-#        if serializer.is_valid():
-#            serializer.save()
-#            return Response(serializer.data)
-#        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-#
-#    # GET -> Search/Filter
-#    # Possible filter (combined):
-#        # By category
-#        # By author
-#        # By distance, passing X latitude, Y longitude and a range Z, in meters
-#    # TODO: Filter by author
-#    def get(self, request):
-
+    if request.method == 'GET':
+        user = get_object_or_404(User.objects.all(), id=pk)
+        print(user)
+        serializer = UserSerializer(user)
+        return Response(serializer.data) 
 
 
 def index(request):
