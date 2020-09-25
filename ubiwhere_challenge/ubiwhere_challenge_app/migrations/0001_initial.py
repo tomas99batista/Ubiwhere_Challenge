@@ -16,16 +16,51 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Occurrence',
+            name="Occurrence",
             fields=[
-                ('occurrence_id', models.AutoField(primary_key=True, serialize=False)),
-                ('description', models.TextField(blank=True)),
-                ('geographic_location', django.contrib.gis.db.models.fields.PointField(blank=True, srid=4326)),
-                ('creation_timestamp', models.DateTimeField(auto_now_add=True)),
-                ('update_timestamp', models.DateTimeField(auto_now=True)),
-                ('state', models.CharField(choices=[('To Validate', 'To Validate'), ('Validated', 'Validated'), ('Solved', 'Solved')], default='To Validate', max_length=18)),
-                ('category', models.CharField(blank=True, choices=[('Construction', 'Construction'), ('Special Event', 'Special Event'), ('Incident', 'Incident'), ('Weather Condition', 'Wheather Condition'), ('Road Condition', 'Road Condition')], max_length=18)),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ("occurrence_id", models.AutoField(primary_key=True, serialize=False)),
+                ("description", models.TextField(blank=True)),
+                (
+                    "geographic_location",
+                    django.contrib.gis.db.models.fields.PointField(
+                        blank=True, srid=4326
+                    ),
+                ),
+                ("creation_timestamp", models.DateTimeField(auto_now_add=True)),
+                ("update_timestamp", models.DateTimeField(auto_now=True)),
+                (
+                    "state",
+                    models.CharField(
+                        choices=[
+                            ("To Validate", "To Validate"),
+                            ("Validated", "Validated"),
+                            ("Solved", "Solved"),
+                        ],
+                        default="To Validate",
+                        max_length=18,
+                    ),
+                ),
+                (
+                    "category",
+                    models.CharField(
+                        blank=True,
+                        choices=[
+                            ("Construction", "Construction"),
+                            ("Special Event", "Special Event"),
+                            ("Incident", "Incident"),
+                            ("Weather Condition", "Wheather Condition"),
+                            ("Road Condition", "Road Condition"),
+                        ],
+                        max_length=18,
+                    ),
+                ),
+                (
+                    "author",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]
