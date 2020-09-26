@@ -11,7 +11,7 @@
 - [Postman Collection](#Postman)
 
 ## Introduction
-This challenge was propused by [Ubiwhere](https://www.ubiwhere.com/) to their backend-dev position. 
+This challenge was proposed by [Ubiwhere](https://www.ubiwhere.com/) to their backend-dev position. 
 Developed in Python/Django, with the support of Django Rest Framework, JWT, Postgres + Postgis, Docker and Gunicorn.
 It's an API to manage Occurrences.
 
