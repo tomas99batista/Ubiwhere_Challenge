@@ -18,10 +18,32 @@
 - **GET**: Filter Occurrences by author/caregory/distance to given point
     - `<ip_addr>:8000/api/occurrence/filter/`
 
+
+- **GET**: Get All Occurrences
+    - `<ip_addr>:8000/api/occurrence/all/`
+
 ### Auth URLS
-`<ip_addr>:8000/`
+- **POST**: Login - Retrieves Auth Token
+    - `<ip_addr>:8000/api/login/`
+
+
+- **POST**: Register - Creates new User
+    - `<ip_addr>:8000/api/register/`
+
+
+- **GET**: Get All Users
+    - `<ip_addr>:8000/api/users/all/`
+
+
+- **GET**: Get User by ID
+- **DELETE**: Delete User by ID
+    - `<ip_addr>:8000/api/user/<int:pk>/`
+
+
 ### Index (Endpoints table)
 `<ip_addr>:8000/`
+![EndPoints](https://imgur.com/a/PsCyhdI)
+
 ## How to run & clear docker-compose
 
 ### Run containers
