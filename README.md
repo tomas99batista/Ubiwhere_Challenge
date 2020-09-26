@@ -75,8 +75,8 @@
 - _Password_: 'admin'
 
 **User**
-- _Username_: 'admin'
-- _Password_: 'admin'
+- _Username_: 'userteste'
+- _Password_: 'userteste'
 
 ## Documentation
 Available on `ubiwhere_challenge/docs/` there is documentation for the `models`, `serializers`, `views` and `urls`
