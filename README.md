@@ -44,16 +44,6 @@
 - `<ip_addr>:8000/`
 ![EndPoints](https://i.imgur.com/jqPmvPY.png)
 
-## How to run & clear docker-compose
-
-__Requirements to run__: Have `docker` & `docker-compose` installed
-
-### Run containers
-`docker-compose up -d --build`
-
-### Clear containers
-`docker-compose down -v`
-
 ## Initial Data
 
 ### Occurrences
@@ -90,3 +80,19 @@ __Requirements to run__: Have `docker` & `docker-compose` installed
 
 ## Documentation
 Available on `ubiwhere_challenge/docs/` there is documentation for the `models`, `serializers`, `views` and `urls`
+
+## How to run & clear docker-compose
+
+__Requirements to run__: Have `docker` & `docker-compose` installed. You will also need Postman in order to run the Collection I prepared.
+
+### Run containers
+`docker-compose up -d --build`
+
+### Clear containers
+`docker-compose down -v`
+
+
+## Postman Collection
+With the docker-compose running you can now test the endpoints with the given collection of Postman.
+
+__URL__: <>
