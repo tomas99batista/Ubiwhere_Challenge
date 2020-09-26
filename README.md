@@ -7,7 +7,7 @@
 - [Endpoints](#Endpoints)
 - [Initial Data](#Initial_Data)
 - [Documentation](#Documentation)
-- [How to run & clear docker-compose](#Running)
+- [Installation](#Installation)
 - [Postman Collection](#Postman)
 
 ## Introduction
@@ -94,9 +94,12 @@ It's an API to manage Occurrences.
 ## Documentation
 Available on `ubiwhere_challenge/docs/` there is documentation for the `models`, `serializers`, `views` and `urls`
 
-## Running
+## Installation
 
 __Requirements to run__: Have `docker` & `docker-compose` installed. You will also need Postman in order to run the Collection I prepared.
+
+### Clone the repository
+Clone this repo to your local machine using https://github.com/tomas99batista/Ubiwhere_Challenge.git
 
 ### Run containers
 `docker-compose up -d --build`
