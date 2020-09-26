@@ -4,16 +4,31 @@
 
 # Table of Contents  
 - [Introduction](#Introduction)
+- [Installation](#Installation)
 - [Endpoints](#Endpoints)
 - [Initial Data](#Initial_Data)
 - [Documentation](#Documentation)
-- [Installation](#Installation)
 - [Postman Collection](#Postman)
 
 ## Introduction
 This challenge was proposed by [Ubiwhere](https://www.ubiwhere.com/) to their backend-dev position. 
 Developed in Python/Django, with the support of Django Rest Framework, JWT, Postgres + Postgis, Docker and Gunicorn.
 It's an API to manage Occurrences.
+
+## Installation
+
+__Requirements to run__: Have `docker` & `docker-compose` installed. You will also need Postman in order to run the Collection I prepared.
+
+### Clone the repository
+Clone this repo to your local machine using https://github.com/tomas99batista/Ubiwhere_Challenge.git
+
+### Run containers
+`docker-compose up -d --build`
+
+### Clear containers
+`docker-compose down -v`
+
+
 
 ## Endpoints
 
@@ -93,20 +108,6 @@ It's an API to manage Occurrences.
 
 ## Documentation
 Available on `ubiwhere_challenge/docs/` there is documentation for the `models`, `serializers`, `views` and `urls`
-
-## Installation
-
-__Requirements to run__: Have `docker` & `docker-compose` installed. You will also need Postman in order to run the Collection I prepared.
-
-### Clone the repository
-Clone this repo to your local machine using https://github.com/tomas99batista/Ubiwhere_Challenge.git
-
-### Run containers
-`docker-compose up -d --build`
-
-### Clear containers
-`docker-compose down -v`
-
 
 ## Postman
 With the docker-compose running you can now test the endpoints with the given collection of Postman.
