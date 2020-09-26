@@ -1,28 +1,28 @@
 [
-    {
-      "model": "ubiwhere_challenge_app.occurrence",
-      "fields": {
-        "occurrence_id" : 1,
-        "description" : "Occurence - CONSTRUCTION - initial data, created by a initial user",
-        "geographic_location" : "POINT(25 -14)",
-        "author" : 1,
-        "state" : "To Validate",
-        "category" : "Construction",
-        "creation_timestamp" : "2020-09-25T17:06:57.001598Z",
-        "update_timestamp" : "2020-09-25T17:06:57.001598Z"
-      }
-    },
-    {
-        "model": "ubiwhere_challenge_app.occurrence",
-        "fields": {
-          "occurrence_id" : 2,
-          "description" : "Occurence - INCIDENT - initial data, created by a initial user",
-          "geographic_location" : "POINT(23 -13)",
-          "author" : 1,
-          "state" : "To Validate",
-          "category" : "Incident",
-          "creation_timestamp" : "2020-09-25T17:06:57.001598Z",
-          "update_timestamp" : "2020-09-25T17:06:57.001598Z"
-        }
-      }
+  {
+    "model": "ubiwhere_challenge_app.occurrence",
+    "fields": {
+      "occurrence_id": 1,
+      "description": "Occurence - CONSTRUCTION - initial data, created by a initial user",
+      "geographic_location": "POINT(25 -14)",
+      "author": 1,
+      "state": "To Validate",
+      "category": "Construction",
+      "creation_timestamp": "2020-09-25T17:06:57.001598Z",
+      "update_timestamp": "2020-09-25T17:06:57.001598Z"
+    }
+  },
+  {
+    "model": "ubiwhere_challenge_app.occurrence",
+    "fields": {
+      "occurrence_id": 2,
+      "description": "Occurence - INCIDENT - initial data, created by a initial user",
+      "geographic_location": "POINT(23 -13)",
+      "author": 1,
+      "state": "To Validate",
+      "category": "Incident",
+      "creation_timestamp": "2020-09-25T17:06:57.001598Z",
+      "update_timestamp": "2020-09-25T17:06:57.001598Z"
+    }
+  }
 ]
