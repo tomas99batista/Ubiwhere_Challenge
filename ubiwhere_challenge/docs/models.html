@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>models.py</title>
+  <link rel="stylesheet" href="pycco.css">
+</head>
+<body>
+<div id='container'>
+  <div id="background"></div>
+  <div class='section'>
+    <div class='docs'><h1>models.py</h1></div>
+  </div>
+  <div class='clearall'>
+  <div class='section' id='section-0'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-0'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.contrib.gis.db</span> <span class="kn">import</span> <span class="n">models</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-1'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-1'>#</a>
+      </div>
+      <h3><span id="models-for-occurrences" href="models-for-occurrences"> Models for Occurrences </span></h3>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-2'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-2'>#</a>
+      </div>
+      <p>The Occurrence class defines the class of occurrences
+Each occurrence has  fields:</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">class</span> <span class="nc">Occurrence</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-3'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-3'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">class</span> <span class="nc">State</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">TextChoices</span><span class="p">):</span>
+        <span class="n">TO_VALIDATE</span> <span class="o">=</span> <span class="s2">&quot;To Validate&quot;</span>
+        <span class="n">VALIDATED</span> <span class="o">=</span> <span class="s2">&quot;Validated&quot;</span>
+        <span class="n">SOLVED</span> <span class="o">=</span> <span class="s2">&quot;Solved&quot;</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-4'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-4'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">class</span> <span class="nc">Category</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">TextChoices</span><span class="p">):</span>
+        <span class="n">CONSTRUCTION</span> <span class="o">=</span> <span class="s2">&quot;Construction&quot;</span>  <span class="c1"># Road works planned events;</span>
+        <span class="n">SPECIAL_EVENT</span> <span class="o">=</span> <span class="s2">&quot;Special Event&quot;</span>  <span class="c1"># Special events (concerts, fairs, etc.);</span>
+        <span class="n">INCIDENT</span> <span class="o">=</span> <span class="s2">&quot;Incident&quot;</span>  <span class="c1"># Accidents or other unexpected events;</span>
+        <span class="n">WHEATHER_CONDITION</span> <span class="o">=</span> <span class="s2">&quot;Weather Condition&quot;</span>  <span class="c1"># Weather events that affect roads;</span>
+        <span class="n">ROAD_CONDITION</span> <span class="o">=</span> <span class="s2">&quot;Road Condition&quot;</span>  <span class="c1"># Road states that affect those who drive on them (degraded pavement, holes, etc.).</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-5'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-5'>#</a>
+      </div>
+      <p><strong>occurrence_id</strong> - unique identifier</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="n">occurrence_id</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">AutoField</span><span class="p">(</span><span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-6'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-6'>#</a>
+      </div>
+      <p><strong>description</strong> - text description</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="n">description</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-7'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-7'>#</a>
+      </div>
+      <p><strong>geographic_location</strong> - PointField with the location</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="n">geographic_location</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">PointField</span><span class="p">(</span><span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-8'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-8'>#</a>
+      </div>
+      <p><strong>author</strong> - creator of the occurrence</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="n">author</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-9'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-9'>#</a>
+      </div>
+      <p><strong>creation_timestamp</strong> - timestamp of the creation  </p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="n">creation_timestamp</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">auto_now_add</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-10'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-10'>#</a>
+      </div>
+      <p><strong>update_timestamp</strong> - timestamp of the last update</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="n">update_timestamp</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">auto_now</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-11'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-11'>#</a>
+      </div>
+      <p><strong>state</strong> - actual state</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="n">state</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span>
+        <span class="n">max_length</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">State</span><span class="o">.</span><span class="n">choices</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">State</span><span class="o">.</span><span class="n">TO_VALIDATE</span>
+    <span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-12'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-12'>#</a>
+      </div>
+      <p><strong>category</strong> - occurrence category</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="n">category</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span>
+        <span class="n">max_length</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">Category</span><span class="o">.</span><span class="n">choices</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-13'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-13'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;ID: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">occurrence_id</span><span class="si">}</span><span class="s2">, Description: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="si">}</span><span class="s2">, Location: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">geographic_location</span><span class="si">}</span><span class="s2">, </span><span class="se">\</span>
+<span class="s2">                Author: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">username</span><span class="si">}</span><span class="s2">, State: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_state_display</span><span class="p">()</span><span class="si">}</span><span class="s2">, Category: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_category_display</span><span class="p">()</span><span class="si">}</span><span class="s2">, </span><span class="se">\</span>
+<span class="s2">                Creation: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">creation_timestamp</span><span class="si">}</span><span class="s2">, Update: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">update_timestamp</span><span class="si">}</span><span class="s2">&quot;</span>
+
+</pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+</div>
+</body>

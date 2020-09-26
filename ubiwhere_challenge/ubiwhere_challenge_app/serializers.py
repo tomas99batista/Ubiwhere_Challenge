@@ -3,11 +3,26 @@ from .models import Occurrence
 from rest_framework_gis.serializers import GeoFeatureModelSerializer
 from django.contrib.auth.models import User
 
+# === Serializers for Occurrences and Users ===
 
-# The serializer for the Occurrence model
-# Takes all fields
-# Used to filter search
+"""
+The serializers are used to transform data into python readable to other format and vice-versa.
+We have 5 Serializers:
+"""
+
+"""
+**OccurrenceSerializer** - The main serializer of [[models.py#Occurrence]]
+"""
 class OccurrenceSerializer(GeoFeatureModelSerializer):
+    """
+    Takes in consideration all fields
+    Used on:
+
+    - [[views.py#update_delete_get_occurrence]] on GET to serialize requested Occurrence
+    - [[views.py#filter_occurrences]] on GET to serialized the filtered Occurrences
+    - [[views.py#get_all_occurrences]] on GET to serialize all the Occurrences
+    
+    """
     class Meta:
         model = Occurrence
         geo_field = "geographic_location"
@@ -21,28 +36,49 @@ class OccurrenceSerializer(GeoFeatureModelSerializer):
             "author",
         )
 
-
-# On the creation the inputs are:
-#   - description
-#   - category
-#   - geographic_location
+"""
+**OccurrenceCreationSerializer** - The serializer for creating Occurrences [[models.py#Occurrence]]
+"""
 class OccurrenceCreationSerializer(GeoFeatureModelSerializer):
+    """
+    Takes in consideration only the geo_field, description and category
+    Used on:
+
+    - [[views.py#add_new_occurrence]] on POST to serialize the Occurrence sent to be created
+    
+    """
     class Meta:
         model = Occurrence
         geo_field = "geographic_location"
         fields = ("description", "category")
 
-
-# On the update/patch the inputs are:
-#   - occurrence_id
-#   - state
+"""
+**OccurrencePatchSerializer** - The serializer for updating the state of the Occurrences [[models.py#Occurrence]]
+"""
 class OccurrencePatchSerializer(serializers.ModelSerializer):
+    """
+    Takes in consideration only the occurrence_id and the state, which is the field to update
+    Used on:
+
+    - [[views.py#update_delete_get_occurrence]] on POST to serialize the updated Occurrence object
+    
+    """
     class Meta:
         model = Occurrence
         fields = ("occurrence_id", "state")
 
-
+"""
+**CreateUserSerializer** - The serializer for creating the authors of [[models.py#Occurrence]]
+"""
 class CreateUserSerializer(serializers.ModelSerializer):
+    """
+    Takes in consideration only the username and the password
+    It's not possible to more than the superuser auto-created (admin)
+    Used on:
+
+    - [[views.py#user_register]] on POST to serialize the new User 
+    
+    """
     class Meta:
         model = User
         fields = [
@@ -60,8 +96,18 @@ class CreateUserSerializer(serializers.ModelSerializer):
         user.save()
         return user
 
-
+"""
+**UserSerializer** - The main serializer of the authors of [[models.py#Occurrence]]
+"""
 class UserSerializer(serializers.ModelSerializer):
+    """
+    Takes in consideration only the id, username and if is a superuser
+    Used on:
+
+    - [[views.py#retrieve_all_users]] on GET to return all Users
+    - [[views.py#get_delete_user]] on GET to return the requested User
+    
+    """
     class Meta:
         model = User
         fields = ("id", "username", "is_superuser")

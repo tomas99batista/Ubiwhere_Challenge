@@ -1,33 +1,11 @@
 [
     {
-      "pk" : 1,
-      "model" : "auth.user",
-      "fields": {
-          "username" : "admin",
-          "password" : "admin",
-          "email" : "admin@example.com",
-          "is_superuser" : true
-      }
-    },
-
-    {
-        "pk" : 2,
-        "model" : "auth.user",
-        "fields": {
-            "username" : "usertestecreator",
-            "password" : "usertestecreator",
-            "email" : "usertestecreator@example.com",
-            "is_superuser" : false
-        }
-    },
-    
-    {
       "model": "ubiwhere_challenge_app.occurrence",
       "fields": {
         "occurrence_id" : 1,
         "description" : "Occurence - CONSTRUCTION - initial data, created by a initial user",
         "geographic_location" : "POINT(25 -14)",
-        "author" : 2,
+        "author" : 1,
         "state" : "To Validate",
         "category" : "Construction",
         "creation_timestamp" : "2020-09-25T17:06:57.001598Z",
@@ -37,10 +15,10 @@
     {
         "model": "ubiwhere_challenge_app.occurrence",
         "fields": {
-          "occurrence_id" : 3,
+          "occurrence_id" : 2,
           "description" : "Occurence - INCIDENT - initial data, created by a initial user",
           "geographic_location" : "POINT(23 -13)",
-          "author" : 2,
+          "author" : 1,
           "state" : "To Validate",
           "category" : "Incident",
           "creation_timestamp" : "2020-09-25T17:06:57.001598Z",
