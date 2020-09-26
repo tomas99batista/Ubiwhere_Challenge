@@ -42,7 +42,7 @@
 
 ### Index (Endpoints table)
 `<ip_addr>:8000/`
-![EndPoints](https://imgur.com/a/PsCyhdI)
+![EndPoints](https://i.imgur.com/jqPmvPY.png)
 
 ## How to run & clear docker-compose
 
