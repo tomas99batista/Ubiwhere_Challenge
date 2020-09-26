@@ -25,9 +25,8 @@ Clone this repo to your local machine using https://github.com/tomas99batista/Ub
 ### Run containers
 `docker-compose up -d --build`
 
-### Clear containers
+### Clean containers
 `docker-compose down -v`
-
 
 
 ## Endpoints
