@@ -4,10 +4,10 @@
 
 # Table of Contents  
 - [Endpoints](#Endpoints)
-- [Initial Data](#Initial Data)
+- [Initial Data](#Initial_Data)
 - [Documentation](#Documentation)
-- [How to run & clear docker-compose](#How to run & clear docker-compose)
-- [Postman Collection](#Postman Collection)
+- [How to run & clear docker-compose](#Running)
+- [Postman Collection](#Postman)
 
 ## Endpoints
 
@@ -51,7 +51,7 @@
 - `<ip_addr>:8000/`
 ![EndPoints](https://i.imgur.com/jqPmvPY.png)
 
-## Initial Data
+## Initial_Data
 
 ### Occurrences
 `{
@@ -88,7 +88,7 @@
 ## Documentation
 Available on `ubiwhere_challenge/docs/` there is documentation for the `models`, `serializers`, `views` and `urls`
 
-## How to run & clear docker-compose
+## Running
 
 __Requirements to run__: Have `docker` & `docker-compose` installed. You will also need Postman in order to run the Collection I prepared.
 
@@ -99,7 +99,7 @@ __Requirements to run__: Have `docker` & `docker-compose` installed. You will al
 `docker-compose down -v`
 
 
-## Postman Collection
+## Postman
 With the docker-compose running you can now test the endpoints with the given collection of Postman.
 
 __URL__: <>
