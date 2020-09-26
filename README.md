@@ -2,33 +2,97 @@
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/8b53fffa7400419e9acea1b6518163ac)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tomas99batista/Ubiwhere_Challenge&amp;utm_campaign=Badge_Grade)
 
+## Endpoints
+
+### API Occurrence URLS
+- **POST**: Add Occurrence
+    - `<ip_addr>:8000/api/occurrence/`
+
+
+- **PATCH**: Update state of Occurrence(occurrence_id=pk)
+- **DELETE**: Delete Occurrence(occurrence_id=pk)
+- **GET**: Get Occurrence(occurrence_id=pk)
+    - `<ip_addr>:8000/api/occurrence/<int:pk>/`
+
+
+- **GET**: Filter Occurrences by author/caregory/distance to given point
+    - `<ip_addr>:8000/api/occurrence/filter/`
+
+
+- **GET**: Get All Occurrences
+    - `<ip_addr>:8000/api/occurrence/all/`
+
+### Auth URLS
+- **POST**: Login - Retrieves Auth Token
+    - `<ip_addr>:8000/api/login/`
+
+
+- **POST**: Register - Creates new User
+    - `<ip_addr>:8000/api/register/`
+
+
+- **GET**: Get All Users
+    - `<ip_addr>:8000/api/users/all/`
+
+
+- **GET**: Get User by ID
+- **DELETE**: Delete User by ID
+    - `<ip_addr>:8000/api/user/<int:pk>/`
+
+
+### Index (Endpoints table)
+- `<ip_addr>:8000/`
+![EndPoints](https://i.imgur.com/jqPmvPY.png)
+
 ## Initial Data
 
+### Occurrences
+`{
+  "occurrence_id": 1,
+  "description": "Occurence - CONSTRUCTION - initial data, created by a initial user",
+  "geographic_location": "POINT(25 -14)",
+  "author": 1,
+  "state": "To Validate",
+  "category": "Construction",
+  "creation_timestamp": "2020-09-25T17:06:57.001598Z",
+  "update_timestamp": "2020-09-25T17:06:57.001598Z"
+}`
+  
+`{
+  "occurrence_id": 2,
+  "description": "Occurence - INCIDENT - initial data, created by a initial user",
+  "geographic_location": "POINT(23 -13)",
+  "author": 1,
+  "state": "To Validate",
+  "category": "Incident",
+  "creation_timestamp": "2020-09-25T17:06:57.001598Z",
+  "update_timestamp": "2020-09-25T17:06:57.001598Z"
+}`
+
 ### Users
+**Superuser**
+- _Username_: 'admin'
+- _Password_: 'admin'
 
-#### Superuser
-user: 'admin'
-pwd: 'admin'
+**User**
+- _Username_: 'admin'
+- _Password_: 'admin'
 
-#### Normaluser
-user: 'usertestecreator'
-pwd: 'usertestecreator'
+## Documentation
+Available on `ubiwhere_challenge/docs/` there is documentation for the `models`, `serializers`, `views` and `urls`
 
-## Docker
+## How to run & clear docker-compose
 
-### Build Compose 
-`docker-compose build`
+__Requirements to run__: Have `docker` & `docker-compose` installed. You will also need Postman in order to run the Collection I prepared.
 
-### Run Compose
-`docker-compose up -d`
-
+### Run containers
 `docker-compose up -d --build`
 
 ### Clear containers
 `docker-compose down -v`
 
-### Run with specific .yml
-`docker-compose -f docker-compose.yml up --build`
 
-### Criar Postgis DB
-`docker run --name=postgres -d -e POSTGRES_USER=postgres -e POSTGRES_PASS=postgres -e POSTGRES_DBNAME=postgres -p 5432:5432 mdillon/postgis`
+## Postman Collection
+With the docker-compose running you can now test the endpoints with the given collection of Postman.
+
+__URL__: <>
