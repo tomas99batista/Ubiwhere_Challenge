@@ -9,7 +9,7 @@
 - [How to run & clear docker-compose](#Running)
 - [Postman Collection](#Postman)
 
-## [Documentation](#Documentation)
+## Endpoints
 
 ### API Occurrence URLS
 - **POST**: Add Occurrence
