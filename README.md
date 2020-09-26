@@ -3,11 +3,17 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/8b53fffa7400419e9acea1b6518163ac)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tomas99batista/Ubiwhere_Challenge&amp;utm_campaign=Badge_Grade)
 
 # Table of Contents  
+- [Introduction](#Introduction)
 - [Endpoints](#Endpoints)
 - [Initial Data](#Initial_Data)
 - [Documentation](#Documentation)
 - [How to run & clear docker-compose](#Running)
 - [Postman Collection](#Postman)
+
+## Introduction
+This challenge was propused by [Ubiwhere](https://www.ubiwhere.com/) to their backend-dev position. 
+Developed in Python/Django, with the support of Django Rest Framework, JWT, Postgres + Postgis, Docker and Gunicorn.
+It's an API to manage Occurrences.
 
 ## Endpoints
 
