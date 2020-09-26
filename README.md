@@ -46,6 +46,8 @@
 
 ## How to run & clear docker-compose
 
+__Requirements to run__: Have docker & docker-compose installed
+
 ### Run containers
 `docker-compose up -d --build`
 
