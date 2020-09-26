@@ -3,9 +3,13 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/8b53fffa7400419e9acea1b6518163ac)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tomas99batista/Ubiwhere_Challenge&amp;utm_campaign=Badge_Grade)
 
 # Table of Contents  
-[Endpoints](##Endpoints)  
+- [Endpoints](##Endpoints)
+- [Initial Data](##Initial Data)
+- [Documentation](##Documentation)
+- [How to run & clear docker-compose](##How to run & clear docker-compose)
+- [Postman Collection](##Postman Collection)
 
-##Endpoints
+## Endpoints
 
 ### API Occurrence URLS
 - **POST**: Add Occurrence
