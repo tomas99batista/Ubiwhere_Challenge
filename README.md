@@ -2,33 +2,67 @@
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/8b53fffa7400419e9acea1b6518163ac)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tomas99batista/Ubiwhere_Challenge&amp;utm_campaign=Badge_Grade)
 
-## Initial Data
+## Endpoints
 
-### Users
+### API Occurrence URLS
+- **POST**: Add Occurrence
+    - `<ip_addr>:8000/api/occurrence/`
 
-#### Superuser
-user: 'admin'
-pwd: 'admin'
 
-#### Normaluser
-user: 'usertestecreator'
-pwd: 'usertestecreator'
+- **PATCH**: Update state of Occurrence(occurrence_id=pk)
+- **DELETE**: Delete Occurrence(occurrence_id=pk)
+- **GET**: Get Occurrence(occurrence_id=pk)
+    - `<ip_addr>:8000/api/occurrence/<int:pk>/`
 
-## Docker
 
-### Build Compose 
-`docker-compose build`
+- **GET**: Filter Occurrences by author/caregory/distance to given point
+    - `<ip_addr>:8000/api/occurrence/filter/`
 
-### Run Compose
-`docker-compose up -d`
+### Auth URLS
+`<ip_addr>:8000/`
+### Index (Endpoints table)
+`<ip_addr>:8000/`
+## How to run & clear docker-compose
 
+### Run containers
 `docker-compose up -d --build`
 
 ### Clear containers
 `docker-compose down -v`
 
-### Run with specific .yml
-`docker-compose -f docker-compose.yml up --build`
+## Initial Data
 
-### Criar Postgis DB
-`docker run --name=postgres -d -e POSTGRES_USER=postgres -e POSTGRES_PASS=postgres -e POSTGRES_DBNAME=postgres -p 5432:5432 mdillon/postgis`
+### Occurrences
+`{
+  "occurrence_id": 1,
+  "description": "Occurence - CONSTRUCTION - initial data, created by a initial user",
+  "geographic_location": "POINT(25 -14)",
+  "author": 1,
+  "state": "To Validate",
+  "category": "Construction",
+  "creation_timestamp": "2020-09-25T17:06:57.001598Z",
+  "update_timestamp": "2020-09-25T17:06:57.001598Z"
+}`
+  
+`{
+  "occurrence_id": 2,
+  "description": "Occurence - INCIDENT - initial data, created by a initial user",
+  "geographic_location": "POINT(23 -13)",
+  "author": 1,
+  "state": "To Validate",
+  "category": "Incident",
+  "creation_timestamp": "2020-09-25T17:06:57.001598Z",
+  "update_timestamp": "2020-09-25T17:06:57.001598Z"
+}`
+
+### Users
+**Superuser**
+- _Username_: 'admin'
+- _Password_: 'admin'
+
+**User**
+- _Username_: 'admin'
+- _Password_: 'admin'
+
+## Documentation
+Available on `ubiwhere_challenge/docs/` there is documentation for the `models`, `serializers`, `views` and `urls`
