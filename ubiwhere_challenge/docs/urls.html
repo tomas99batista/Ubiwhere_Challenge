@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>urls.py</title>
+  <link rel="stylesheet" href="pycco.css">
+</head>
+<body>
+<div id='container'>
+  <div id="background"></div>
+  <div class='section'>
+    <div class='docs'><h1>urls.py</h1></div>
+  </div>
+  <div class='clearall'>
+  <div class='section' id='section-0'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-0'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span>
+<span class="kn">from</span> <span class="nn">rest_framework_simplejwt</span> <span class="kn">import</span> <span class="n">views</span> <span class="k">as</span> <span class="n">jwt_views</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">views</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-1'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-1'>#</a>
+      </div>
+      <h3><span id="serializers-for-occurrences-and-users" href="serializers-for-occurrences-and-users"> Serializers for Occurrences and Users </span></h3>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-2'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-2'>#</a>
+      </div>
+      <p>The urls are the endpoints to access the API and the index page
+We have 9 urls:</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-3'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-3'>#</a>
+      </div>
+      <p><strong>API URLS</strong> - The urls for the Occurrence  <a href="models.html#Occurrence">models.py</a></p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-4'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-4'>#</a>
+      </div>
+      <ul>
+<li><strong>POST: Add Occurrence</strong> - Create a new Occurrence</li>
+</ul>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;api/occurrence/&quot;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">add_new_occurrence</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;add_new_occurrence&quot;</span><span class="p">),</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-5'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-5'>#</a>
+      </div>
+      <ul>
+<li><strong>PATCH: Update one Occurrence</strong> - Updates the state of the Occurrence requested - Only Superusers</li>
+<li><strong>DELETE: Delete one Occurrence</strong> - Deletes the Occurrence requested - Only SuperUsers or Authors</li>
+<li><strong>GET: Get Occurrence By ID</strong> - Gets the Occurrence requested</li>
+</ul>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="n">path</span><span class="p">(</span>
+        <span class="s2">&quot;api/occurrence/&lt;int:pk&gt;/&quot;</span><span class="p">,</span>
+        <span class="n">views</span><span class="o">.</span><span class="n">update_delete_get_occurrence</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;update_delete_get_occurrence&quot;</span><span class="p">,</span>
+    <span class="p">),</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-6'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-6'>#</a>
+      </div>
+      <ul>
+<li><strong>GET: Filter Occurrences</strong> - Gets the Occurrences filtered by author/caregory/distance to given point</li>
+</ul>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;api/occurrence/filter/&quot;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">filter_occurrences</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;filter_occurrences&quot;</span><span class="p">),</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-7'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-7'>#</a>
+      </div>
+      <ul>
+<li><strong>GET: Get All Occurrences</strong> - Retrieves all Occurrences</li>
+</ul>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;api/occurrence/all/&quot;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">get_all_occurrences</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;get_all_occurrences&quot;</span><span class="p">),</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-8'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-8'>#</a>
+      </div>
+      <p><strong>AUTH URLS</strong> - The urls for the User (author  <a href="models.html#Occurrence">models.py</a>)</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-9'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-9'>#</a>
+      </div>
+      <ul>
+<li><strong>POST: Login</strong> - Retrieves Auth Token</li>
+</ul>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;api/login/&quot;</span><span class="p">,</span> <span class="n">jwt_views</span><span class="o">.</span><span class="n">TokenObtainPairView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;login&quot;</span><span class="p">),</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-10'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-10'>#</a>
+      </div>
+      <ul>
+<li><strong>POST: Register</strong> - Register new User</li>
+</ul>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;api/register/&quot;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">user_register</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;user_register&quot;</span><span class="p">),</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-11'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-11'>#</a>
+      </div>
+      <ul>
+<li><strong>GET: Get All Users</strong> - Retrieves all Users</li>
+</ul>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;api/users/&quot;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">retrieve_all_users</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;retrieve_all_users&quot;</span><span class="p">),</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-12'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-12'>#</a>
+      </div>
+      <ul>
+<li><strong>GET: Get User By ID</strong> - Retrieves requested User</li>
+<li><strong>DELETE: Delete one User</strong> - Deletes requested User - Only SuperUsers</li>
+</ul>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;api/user/&lt;int:pk&gt;/&quot;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">get_delete_user</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;get_delete_user&quot;</span><span class="p">),</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-13'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-13'>#</a>
+      </div>
+      <p><strong>TEMPLATE URLS</strong> - The URLS for HTML pages</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;index&quot;</span><span class="p">),</span>
+<span class="p">]</span>
+
+</pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+</div>
+</body>

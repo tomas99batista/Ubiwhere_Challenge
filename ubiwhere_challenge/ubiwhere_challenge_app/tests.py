@@ -33,4 +33,3 @@ from django.test import TestCase
     # DELETE: Delete given User (by ID) - only allowed by superusers ✔️
     path("api/user/<int:pk>/", views.get_delete_user, name="get_delete_user"),
 """
-

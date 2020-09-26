@@ -3,12 +3,14 @@ from django.contrib.auth.models import User
 
 # === Models for Occurrences ===
 
+
 class Occurrence(models.Model):
     """
     The Occurrence class defines the class of occurrences
     Each occurrence has  fields:
 
     """
+
     class State(models.TextChoices):
         TO_VALIDATE = "To Validate"
         VALIDATED = "Validated"
@@ -29,7 +31,7 @@ class Occurrence(models.Model):
     geographic_location = models.PointField(blank=True)
     # **author** - creator of the occurrence
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    # **creation_timestamp** - timestamp of the creation  
+    # **creation_timestamp** - timestamp of the creation
     creation_timestamp = models.DateTimeField(auto_now_add=True)
     # **update_timestamp** - timestamp of the last update
     update_timestamp = models.DateTimeField(auto_now=True)

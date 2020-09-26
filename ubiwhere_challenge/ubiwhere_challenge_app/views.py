@@ -1,8 +1,5 @@
 from django.shortcuts import render
-from rest_framework.decorators import (
-    api_view,
-    permission_classes
-)
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework import status
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
@@ -15,10 +12,7 @@ from .serializers import (
     OccurrenceSerializer,
     OccurrencePatchSerializer,
 )
-from rest_framework.permissions import (
-    IsAuthenticated,
-    AllowAny
-)
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import Occurrence
 
 """
@@ -51,13 +45,14 @@ def add_new_occurrence(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 # === Update/Delete/Get Occurence X ===
 @api_view(["PATCH", "DELETE", "GET"])
 @permission_classes([IsAuthenticated])
 def update_delete_get_occurrence(request, pk):
     """
     View where is possible to update, delete or get a given Occurrence, passing the
-    primary key through the url 
+    primary key through the url
     Only allowed to Authenticated Users. Only superusers or the authors
     of the Occurrence are allowed to delete. Only superusers are authorized
     to update the Occurrence (and only the state is updatable)
@@ -95,13 +90,14 @@ def update_delete_get_occurrence(request, pk):
         serializer = OccurrenceSerializer(occurrence)
         return Response(serializer.data)
 
+
 # === Get Occurrences Filtered ===
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def filter_occurrences(request):
     """
     View where is possible to filter the Occurences pretended by:
-    
+
     - author: passing the username
     - category: from the valid ones
     - distance: passing a POINT(longitude latitude) and the range pretended from that point
@@ -148,7 +144,13 @@ def filter_occurrences(request):
             )
 
     # If no type of filter (category, distance or author) is passed.
-    if (not category and not latitude and not longitude and not distance_range and not username):
+    if (
+        not category
+        and not latitude
+        and not longitude
+        and not distance_range
+        and not username
+    ):
         return Response(
             "BAD REQUEST: You need to pass at least one type of filter.",
             status=status.HTTP_400_BAD_REQUEST,
@@ -162,6 +164,7 @@ def filter_occurrences(request):
     serializer = OccurrenceSerializer(queryset, many=True)
     return Response(serializer.data)
 
+
 # === Get All Occurences ===
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
@@ -173,6 +176,7 @@ def get_all_occurrences(request):
     queryset = Occurrence.objects.all()
     serializer = OccurrenceSerializer(queryset, many=True)
     return Response(serializer.data)
+
 
 # === Register User ===
 @api_view(["POST"])
@@ -187,6 +191,7 @@ def user_register(request):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 # === Get All Users ===
 @api_view(["GET"])
