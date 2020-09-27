@@ -34,6 +34,7 @@ We have 8 views:
 
 """
 
+
 # === Add New Occurence ===
 @swagger_auto_schema(method="post", request_body=OccurrenceCreationSerializer)
 @api_view(["POST"])
@@ -150,13 +151,7 @@ def filter_occurrences(request):
             )
 
     # If no type of filter (category, distance or author) is passed.
-    if (
-        not category
-        and not latitude
-        and not longitude
-        and not distance_range
-        and not username
-    ):
+    if not category and not latitude and not longitude and not distance_range and not username:
         return Response(
             "BAD REQUEST: You need to pass at least one type of filter.",
             status=status.HTTP_400_BAD_REQUEST,

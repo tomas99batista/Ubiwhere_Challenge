@@ -1,7 +1,8 @@
 # TODO: Postman collection -> DEFINIR VARIABLE DO TOKEN
 
-# TODO: README.md (Comandos a usar, etc, por tudo bonito)
+# TODO: Acabar test_views.py
+
+# TODO: Mudar para lat, long
 
 # TODO: Docker PROD; Gunicorn, etc
-# TODO: Script para correr prod ou dev ?
-# TODO: CI/CD Git Actions
+    # TODO: Script para correr prod ou dev ?
