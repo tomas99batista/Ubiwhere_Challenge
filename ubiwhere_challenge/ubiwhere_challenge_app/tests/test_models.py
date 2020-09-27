@@ -7,18 +7,24 @@ from rest_framework import status
 
 # --- Model Tests ---
 print("\nMODELS TESTS\n")
-class OccurrenceModelTest(TestCase):    
+
+
+class OccurrenceModelTest(TestCase):
     def setUp(self):
-        self.occurrence = Occurrence.objects.create(description= "Occurence - CONSTRUCTION - initial data, created by a initial user",
-                                            geographic_location= "POINT(25 -14)",
-                                            author= User.objects.create_user('userteste', 'userteste@example.com', 'userteste'),
-                                            category="Construction")
-    
+        self.occurrence = Occurrence.objects.create(
+            description="Occurence - CONSTRUCTION - initial data, created by a initial user",
+            geographic_location="POINT(25 -14)",
+            author=User.objects.create_user(
+                "userteste", "userteste@example.com", "userteste"
+            ),
+            category="Construction",
+        )
+
     def test_occurrence_fields(self):
         self.assertIsInstance(self.occurrence.description, str)
         self.assertIsInstance(self.occurrence.category, str)
         self.assertIsInstance(self.occurrence.state, str)
-    
+
     def test_occurrence_default_state(self):
         self.assertEqual(self.occurrence.state, "To Validate")
 
