@@ -27,4 +27,4 @@ jobs:
         pip install -r ubiwhere_challenge/requirements.txt
     - name: Run Tests
       run: |
-        python ubiwhere_challenge/manage.py test
+        docker-compose -f ubiwhere_challenge/docker-compose.yml up -d --build
