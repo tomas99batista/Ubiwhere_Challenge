@@ -9,6 +9,7 @@
 - [Initial Data](#Initial_Data)
 - [Documentation](#Documentation)
 - [Postman Collection](#Postman)
+- [Continuous Integration](#CI)
 
 ## Introduction
 This challenge was proposed by [Ubiwhere](https://www.ubiwhere.com/) to their backend-dev position. 
@@ -115,7 +116,10 @@ In order to test the endpoints (as a normal_user or as a super_user), you first 
 ![Saving Auth Token](https://i.imgur.com/bK2SlLh.png)
 
 
-### Postman
+## Postman
 With the docker-compose running you can now test the endpoints with the given collection of Postman.
 
 __URL__: <>
+
+## CI
+There is an workflow checking if build state on every commit to master. It can be seen on `https://github.com/tomas99batista/Ubiwhere_Challenge/actions`.
