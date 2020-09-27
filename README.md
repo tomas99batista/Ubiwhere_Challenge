@@ -7,6 +7,7 @@
 - [Installation](#Installation)
 - [Endpoints](#Endpoints)
 - [Initial Data](#Initial_Data)
+- [Tests](#Tests)
 - [Documentation](#Documentation)
     - [Swagger](#Swagger)
 - [Postman Collection](#Postman)
@@ -106,6 +107,9 @@ Clone this repo to your local machine using https://github.com/tomas99batista/Ub
 **User**
 - _Username_: 'userteste'
 - _Password_: 'userteste'
+
+## Tests
+There are 2 types of tests: tests to the Occurence model (`tests/test_models.py`) and to the API views (`tests/test_views.py`).
 
 ## Documentation
 Available on `ubiwhere_challenge/docs/` there is documentation for the `models`, `serializers`, `views` and `urls`
