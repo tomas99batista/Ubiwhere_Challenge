@@ -108,7 +108,13 @@ Clone this repo to your local machine using https://github.com/tomas99batista/Ub
 ## Documentation
 Available on `ubiwhere_challenge/docs/` there is documentation for the `models`, `serializers`, `views` and `urls`
 
-## Postman
+### Swagger
+There is an swagger available on <ip_addr>:8000/swagger/
+In order to test the endpoints (as a normal_user or as a super_user), you first must obtain the Auth Token by logging in and then saving the token as: `Bearer <Token>` and save, as seen on the image:
+![Saving Auth Token](https://i.imgur.com/78UjaX1.png)
+
+
+### Postman
 With the docker-compose running you can now test the endpoints with the given collection of Postman.
 
 __URL__: <>
