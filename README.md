@@ -8,6 +8,7 @@
 - [Endpoints](#Endpoints)
 - [Initial Data](#Initial_Data)
 - [Documentation](#Documentation)
+    - [Swagger](#Swagger)
 - [Postman Collection](#Postman)
 - [Continuous Integration](#CI)
 
