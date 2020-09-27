@@ -1,10 +1,15 @@
 from django.shortcuts import render
+
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework import status
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from drf_yasg.utils import swagger_auto_schema
+
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.gis.geos import GEOSGeometry
+
 from .serializers import (
     OccurrenceCreationSerializer,
     CreateUserSerializer,
@@ -12,7 +17,6 @@ from .serializers import (
     OccurrenceSerializer,
     OccurrencePatchSerializer,
 )
-from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import Occurrence
 
 """
@@ -31,6 +35,7 @@ We have 8 views:
 """
 
 # === Add New Occurence ===
+@swagger_auto_schema(method="post", request_body=OccurrenceCreationSerializer)
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def add_new_occurrence(request):
@@ -47,6 +52,7 @@ def add_new_occurrence(request):
 
 
 # === Update/Delete/Get Occurence X ===
+@swagger_auto_schema(method="patch", request_body=OccurrencePatchSerializer)
 @api_view(["PATCH", "DELETE", "GET"])
 @permission_classes([IsAuthenticated])
 def update_delete_get_occurrence(request, pk):
@@ -179,6 +185,7 @@ def get_all_occurrences(request):
 
 
 # === Register User ===
+@swagger_auto_schema(method="post", request_body=CreateUserSerializer)
 @api_view(["POST"])
 @permission_classes([AllowAny])
 def user_register(request):
