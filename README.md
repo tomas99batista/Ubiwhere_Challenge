@@ -2,6 +2,33 @@
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/8b53fffa7400419e9acea1b6518163ac)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tomas99batista/Ubiwhere_Challenge&amp;utm_campaign=Badge_Grade)
 
+# Table of Contents  
+- [Introduction](#Introduction)
+- [Installation](#Installation)
+- [Endpoints](#Endpoints)
+- [Initial Data](#Initial_Data)
+- [Documentation](#Documentation)
+- [Postman Collection](#Postman)
+
+## Introduction
+This challenge was proposed by [Ubiwhere](https://www.ubiwhere.com/) to their backend-dev position. 
+Developed in Python/Django, with the support of Django Rest Framework, JWT, Postgres + Postgis, Docker and Gunicorn.
+It's an API to manage Occurrences.
+
+## Installation
+
+__Requirements to run__: Have `docker` & `docker-compose` installed. You will also need Postman in order to run the Collection I prepared.
+
+### Clone the repository
+Clone this repo to your local machine using https://github.com/tomas99batista/Ubiwhere_Challenge.git
+
+### Run containers
+`docker-compose up -d --build`
+
+### Clean containers
+`docker-compose down -v`
+
+
 ## Endpoints
 
 ### API Occurrence URLS
@@ -44,7 +71,7 @@
 - `<ip_addr>:8000/`
 ![EndPoints](https://i.imgur.com/jqPmvPY.png)
 
-## Initial Data
+## Initial_Data
 
 ### Occurrences
 `{
@@ -75,24 +102,20 @@
 - _Password_: 'admin'
 
 **User**
-- _Username_: 'admin'
-- _Password_: 'admin'
+- _Username_: 'userteste'
+- _Password_: 'userteste'
 
 ## Documentation
 Available on `ubiwhere_challenge/docs/` there is documentation for the `models`, `serializers`, `views` and `urls`
 
-## How to run & clear docker-compose
+### Swagger
+There is an swagger available on `<ip_addr>:8000/swagger/`. 
+In order to test the endpoints (as a normal_user or as a super_user), you first must obtain the Auth Token by logging in (using the endpoint on Swagger) and then go to "Authorize", insert the the token, saving as: `Bearer <Token>`, as seen on image:
 
-__Requirements to run__: Have `docker` & `docker-compose` installed. You will also need Postman in order to run the Collection I prepared.
-
-### Run containers
-`docker-compose up -d --build`
-
-### Clear containers
-`docker-compose down -v`
+![Saving Auth Token](https://i.imgur.com/bK2SlLh.png)
 
 
-## Postman Collection
+### Postman
 With the docker-compose running you can now test the endpoints with the given collection of Postman.
 
 __URL__: <>
