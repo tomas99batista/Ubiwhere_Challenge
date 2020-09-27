@@ -121,5 +121,5 @@ With the docker-compose running you can now test the endpoints with the given co
 
 __URL__: <>
 
-## CI
+## [Continuous Integration] (CI)
 There is an workflow checking if build state on every commit to master. It can be seen on `https://github.com/tomas99batista/Ubiwhere_Challenge/actions`.
