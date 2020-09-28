@@ -59,7 +59,7 @@ It's an API to manage Occurrences.
 ### Index (Endpoints table)
 
 - `<ip_addr>:8000/`
-  ![EndPoints](https://i.imgur.com/jqPmvPY.png)
+  ![EndPoints](https://i.imgur.com/ayIHvT1.png)
 
 ## Initial_Data
 
