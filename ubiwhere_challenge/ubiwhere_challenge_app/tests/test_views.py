@@ -42,12 +42,12 @@ class OccurrenceAPITest(APITestCase):
         )
         self.super_user_token = resp.data["access"]
 
-    # --- OCCURRENCES TESTS ---
-
-    # Create Occurrence Authenticated
-    def test_add_occurrence_authenticated(self):
+    # Method to add occurrendes as a super user
+    def add_occurrence_example_super_user(self):
         self.login_super_user()
-        self.client.credentials(HTTP_AUTHORIZATION="Bearer " + self.super_user_token)
+        self.client.credentials(
+            HTTP_AUTHORIZATION="Bearer " + self.super_user_token)
+
         url = reverse("add_new_occurrence")
         resp = self.client.post(
             url,
@@ -60,6 +60,34 @@ class OccurrenceAPITest(APITestCase):
             format="json",
         )
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
+
+        return resp
+
+    # Method to add occurrendes as a normal user
+    def add_occurrence_example_normal_user(self):
+        self.login_normal_user()
+        self.client.credentials(
+            HTTP_AUTHORIZATION="Bearer " + self.normal_user_token)
+
+        url = reverse("add_new_occurrence")
+        resp = self.client.post(
+            url,
+            {
+                "description": "Teste Add Occurrence",
+                "category": "Construction",
+                "longitude": 40,
+                "latitude": -7,
+            },
+            format="json",
+        )
+        self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
+
+        return resp
+    # --- OCCURRENCES TESTS ---
+
+    # Create Occurrence Authenticated
+    def test_add_occurrence_authenticated(self):
+        resp = self.add_occurrence_example_normal_user()
 
     # Create Bad Occurrence - Withouth authentication
     def test_add_occurrence_without_authentication(self):
@@ -78,129 +106,59 @@ class OccurrenceAPITest(APITestCase):
 
     # Patch Occurrence as normal user
     def test_patch_occurrence_normal_user(self):
-        self.login_normal_user()
-        self.client.credentials(HTTP_AUTHORIZATION="Bearer " + self.normal_user_token)
-
-        # First add the Occurrence
-        url = reverse("add_new_occurrence")
-        resp_occurr_creation = self.client.post(
-            url,
-            {
-                "description": "Teste Add Occurrence",
-                "category": "Construction",
-                "longitude": 40,
-                "latitude": -7,
-            },
-            format="json",
-        )
-        self.assertEquals(resp_occurr_creation.status_code, status.HTTP_201_CREATED)
+        resp = self.add_occurrence_example_normal_user()
 
         # Patch the occurrence
-        url = "/api/occurrence/" + str(resp_occurr_creation.data["occurrence_id"]) + "/"
-        resp = self.client.patch(url, data={"state": "Validated"}, format="json")
+        url = "/api/occurrence/" + str(resp.data["occurrence_id"]) + "/"
+        resp = self.client.patch(
+            url, data={"state": "Validated"}, format="json")
 
         self.assertEqual(resp.status_code, status.HTTP_401_UNAUTHORIZED)
 
     # Delete Occurrence as normal user
     def test_delete_occurrence_normal_user(self):
-        self.login_super_user()
-        self.client.credentials(HTTP_AUTHORIZATION="Bearer " + self.super_user_token)
-
-        # First add the Occurrence
-        url = reverse("add_new_occurrence")
-        resp_occurr_creation = self.client.post(
-            url,
-            {
-                "description": "Teste Add Occurrence",
-                "category": "Construction",
-                "longitude": 40,
-                "latitude": -7,
-            },
-            format="json",
-        )
-        self.assertEquals(resp_occurr_creation.status_code, status.HTTP_201_CREATED)
+        resp = self.add_occurrence_example_super_user()
 
         # Now login as normal user, which is not the author
         self.login_normal_user()
-        self.client.credentials(HTTP_AUTHORIZATION="Bearer " + self.normal_user_token)
+        self.client.credentials(
+            HTTP_AUTHORIZATION="Bearer " + self.normal_user_token)
 
         # Delete the occurrence
-        url = "/api/occurrence/" + str(resp_occurr_creation.data["occurrence_id"]) + "/"
-        resp = self.client.delete(url, data={"state": "Validated"}, format="json")
+        url = "/api/occurrence/" + str(resp.data["occurrence_id"]) + "/"
+        resp = self.client.delete(
+            url, data={"state": "Validated"}, format="json")
 
         self.assertEqual(resp.status_code, status.HTTP_401_UNAUTHORIZED)
 
     # Delete Occurrence as super user
     def test_delete_occurrence_super_user(self):
-        self.login_super_user()
-        self.client.credentials(HTTP_AUTHORIZATION="Bearer " + self.super_user_token)
-
-        # First add the Occurrence
-        url = reverse("add_new_occurrence")
-        resp_occurr_creation = self.client.post(
-            url,
-            {
-                "description": "Teste Add Occurrence",
-                "category": "Construction",
-                "longitude": 40,
-                "latitude": -7,
-            },
-            format="json",
-        )
-        self.assertEquals(resp_occurr_creation.status_code, status.HTTP_201_CREATED)
+        resp = self.add_occurrence_example_super_user()
 
         # Delete the occurrence
-        url = "/api/occurrence/" + str(resp_occurr_creation.data["occurrence_id"]) + "/"
-        resp = self.client.delete(url, data={"state": "Validated"}, format="json")
+        url = "/api/occurrence/" + str(resp.data["occurrence_id"]) + "/"
+        resp = self.client.delete(
+            url, data={"state": "Validated"}, format="json")
 
         self.assertEqual(resp.status_code, status.HTTP_204_NO_CONTENT)
 
     # Delete Occurrence as author
     def test_delete_occurrence_author(self):
-        self.login_normal_user()
-        self.client.credentials(HTTP_AUTHORIZATION="Bearer " + self.normal_user_token)
-
-        # First add the Occurrence
-        url = reverse("add_new_occurrence")
-        resp_occurr_creation = self.client.post(
-            url,
-            {
-                "description": "Teste Add Occurrence",
-                "category": "Construction",
-                "longitude": 40,
-                "latitude": -7,
-            },
-            format="json",
-        )
-        self.assertEquals(resp_occurr_creation.status_code, status.HTTP_201_CREATED)
+        resp = self.add_occurrence_example_normal_user()
 
         # Delete the occurrence
-        url = "/api/occurrence/" + str(resp_occurr_creation.data["occurrence_id"]) + "/"
-        resp = self.client.delete(url, data={"state": "Validated"}, format="json")
+        url = "/api/occurrence/" + str(resp.data["occurrence_id"]) + "/"
+        resp = self.client.delete(
+            url, data={"state": "Validated"}, format="json")
 
         self.assertEqual(resp.status_code, status.HTTP_204_NO_CONTENT)
 
     # Get Occurrence
     def test_get_occurrence(self):
-        self.login_normal_user()
-        self.client.credentials(HTTP_AUTHORIZATION="Bearer " + self.normal_user_token)
-
-        # First add the Occurrence
-        url = reverse("add_new_occurrence")
-        resp_occurr_creation = self.client.post(
-            url,
-            {
-                "description": "Teste Add Occurrence",
-                "category": "Construction",
-                "longitude": 40,
-                "latitude": -7,
-            },
-            format="json",
-        )
-        self.assertEquals(resp_occurr_creation.status_code, status.HTTP_201_CREATED)
+        resp = self.add_occurrence_example_normal_user()
 
         # Get the occurrence
-        url = "/api/occurrence/" + str(resp_occurr_creation.data["occurrence_id"]) + "/"
+        url = "/api/occurrence/" + str(resp.data["occurrence_id"]) + "/"
         resp = self.client.get(url, format="json")
 
         self.assertEqual(resp.status_code, status.HTTP_302_FOUND)
@@ -208,7 +166,8 @@ class OccurrenceAPITest(APITestCase):
     # Get Occurrence Not Created
     def test_get_occurrence_not_created(self):
         self.login_normal_user()
-        self.client.credentials(HTTP_AUTHORIZATION="Bearer " + self.normal_user_token)
+        self.client.credentials(
+            HTTP_AUTHORIZATION="Bearer " + self.normal_user_token)
 
         # Get the occurrence
         url = "/api/occurrence/1000000001/"
@@ -218,22 +177,7 @@ class OccurrenceAPITest(APITestCase):
 
     # Get All Occurrences
     def test_get_all_occurrences(self):
-        self.login_normal_user()
-        self.client.credentials(HTTP_AUTHORIZATION="Bearer " + self.normal_user_token)
-
-        # First add the Occurrence
-        url = reverse("add_new_occurrence")
-        resp_occurr_creation = self.client.post(
-            url,
-            {
-                "description": "Teste Add Occurrence",
-                "category": "Construction",
-                "longitude": 40,
-                "latitude": -7,
-            },
-            format="json",
-        )
-        self.assertEquals(resp_occurr_creation.status_code, status.HTTP_201_CREATED)
+        resp = self.add_occurrence_example_normal_user()
 
         # Get the occurrence
         url = reverse("get_all_occurrences")
@@ -244,7 +188,8 @@ class OccurrenceAPITest(APITestCase):
     # Get All Occurrences without having them
     def test_get_all_occurrences_failure(self):
         self.login_normal_user()
-        self.client.credentials(HTTP_AUTHORIZATION="Bearer " + self.normal_user_token)
+        self.client.credentials(
+            HTTP_AUTHORIZATION="Bearer " + self.normal_user_token)
 
         # Get the occurrence
         url = reverse("get_all_occurrences")
@@ -254,25 +199,25 @@ class OccurrenceAPITest(APITestCase):
 
     # --- AUTH TESTS ---
 
-    # Get all Users
-    def test_get_all_users(self):
+    def get_all_users_aux(self):
         self.login_normal_user()
-        self.client.credentials(HTTP_AUTHORIZATION="Bearer " + self.normal_user_token)
+        self.client.credentials(
+            HTTP_AUTHORIZATION="Bearer " + self.normal_user_token)
 
         # Get the occurrence
         url = reverse("get_all_users")
         resp = self.client.get(url, format="json")
+        self.assertEqual(resp.status_code, status.HTTP_302_FOUND)
+        return resp
+
+    # Get all Users
+    def test_get_all_users(self):
+        resp = self.get_all_users_aux()
         self.assertEqual(resp.status_code, status.HTTP_302_FOUND)
 
     # Get user by ID
     def test_get_user_by_id(self):
-        self.login_normal_user()
-        self.client.credentials(HTTP_AUTHORIZATION="Bearer " + self.normal_user_token)
-
-        # Get the occurrence
-        url = reverse("get_all_users")
-        resp = self.client.get(url, format="json")
-        self.assertEqual(resp.status_code, status.HTTP_302_FOUND)
+        resp = self.get_all_users_aux()
 
         user_id = resp.data[0]["id"]
 
@@ -285,7 +230,8 @@ class OccurrenceAPITest(APITestCase):
     # Get user by ID - Failure
     def test_get_user_by_id_not_found(self):
         self.login_normal_user()
-        self.client.credentials(HTTP_AUTHORIZATION="Bearer " + self.normal_user_token)
+        self.client.credentials(
+            HTTP_AUTHORIZATION="Bearer " + self.normal_user_token)
 
         # Get the occurrence
         url = "/api/user/10000000/"
@@ -295,17 +241,10 @@ class OccurrenceAPITest(APITestCase):
 
     # Delete User as normal user
     def test_delete_user_as_normal_user(self):
-        self.login_normal_user()
-        self.client.credentials(HTTP_AUTHORIZATION="Bearer " + self.normal_user_token)
-
-        # Get the occurrence
-        url = reverse("get_all_users")
-        resp = self.client.get(url, format="json")
-        self.assertEqual(resp.status_code, status.HTTP_302_FOUND)
+        resp = self.get_all_users_aux()
 
         user_id = resp.data[0]["id"]
 
-        # Get the occurrence
         url = "/api/user/" + str(user_id) + "/"
         resp = self.client.delete(url, format="json")
 
@@ -324,5 +263,6 @@ class OccurrenceAPITest(APITestCase):
     # Test Bad Registration - Missing username field
     def test_bad_registration_missing_fields(self):
         url = reverse("user_register")
-        resp = self.client.post(url, {"password": "user_register"}, format="json")
+        resp = self.client.post(
+            url, {"password": "user_register"}, format="json")
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
