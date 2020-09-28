@@ -39,11 +39,12 @@ urlpatterns = [
         views.occurrences_by_id_view,
         name="occurrences_by_id_view",
     ),
-    # **USER URLS** - The urls for the User (author [[models.py#Occurrence]])
+    # **AUTH URLS** - The urls for the User (author [[models.py#Occurrence]])
     # - **POST: Login** - Retrieves Auth Token
     path("api/login/", jwt_views.TokenObtainPairView.as_view(), name="login"),
     # - **POST: Register** - Register new User
     path("api/register/", views.user_register_view, name="user_register_view"),
+    # **USER URLS** - The urls for the User (author [[models.py#Occurrence]])
     # - **GET: Get All Users** - Retrieves all Users
     path("api/users/", views.get_all_users_view, name="get_all_users_view"),
     # - **GET: Get User By ID** - Retrieves requested User
