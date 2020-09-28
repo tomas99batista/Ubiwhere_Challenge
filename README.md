@@ -19,7 +19,7 @@
 ## Introduction
 
 This challenge was proposed by [Ubiwhere](https://www.ubiwhere.com/) for their backend-dev position.
-Developed in Python/Django, with the support of Django Rest Framework, JWT, Postgres + Postgis and Docker.
+It was developed in Python/Django, with the support of Django Rest Framework, JWT, Postgres + Postgis and Docker.
 It's an API to manage Occurrences.
 
 ## Endpoints
@@ -28,7 +28,7 @@ It's an API to manage Occurrences.
 
 - **POST**: Add Occurrence
 - **GET**: Get All Occurrences - If no filters are passed
-- **GET**: Filter Occurrences by author/caregory/distance to given point
+- **GET**: Filter Occurrences by author/caregory/distance to a given point
 
   - `<ip_addr>:8000/api/occurrences/`
 
@@ -67,7 +67,7 @@ It's an API to manage Occurrences.
 
 There is a swagger available. There is also a **redoc**: `<ip_addr>:8000/redoc/`.
 
-In order to test the endpoints (as a normal_user or as a super_user), you first must obtain the Auth Token by logging in (using the endpoint on Swagger) and then go to "Authorize", insert the the token, saving as: `Bearer <Token>`, as seen on image:
+In order to test the endpoints (as a normal_user or as a super_user), you first must obtain the Auth Token by logging in (using the endpoint on Swagger) and then go to "Authorize", insert the token, saving as: `Bearer <Token>`, as seen on the following image:
 
 ![Saving Auth Token](https://i.imgur.com/bK2SlLh.png)
 
@@ -130,7 +130,7 @@ Available on `ubiwhere_challenge/docs/` there is documentation for the `models`,
 
 ## CI
 
-There is an workflow checking if build state on every commit to master. It can be seen on <https://github.com/tomas99batista/Ubiwhere_Challenge/actions>
+There is an workflow checking the build state on every commit to the master branch. It can be seen on <https://github.com/tomas99batista/Ubiwhere_Challenge/actions>
 
 ## Author
 
