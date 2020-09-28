@@ -65,7 +65,8 @@ It's an API to manage Occurrences.
 ### Swagger
 - `<ip_addr>:8000/swagger/`
 
-There is a swagger available. There is also redoc: `<ip_addr>:8000/redoc/`
+There is a swagger available. There is also redoc: `<ip_addr>:8000/redoc/`.
+
 In order to test the endpoints (as a normal_user or as a super_user), you first must obtain the Auth Token by logging in (using the endpoint on Swagger) and then go to "Authorize", insert the the token, saving as: `Bearer <Token>`, as seen on image:
 
 ![Saving Auth Token](https://i.imgur.com/bK2SlLh.png)
