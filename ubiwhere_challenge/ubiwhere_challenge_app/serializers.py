@@ -15,6 +15,7 @@ We have 5 Serializers:
 class OccurrenceSerializer(serializers.ModelSerializer):
 
     """
+
     Takes in consideration all fields
     Used on:
 
@@ -114,13 +115,15 @@ class CreateUserSerializer(serializers.ModelSerializer):
 
 
 """
+
 **UserSerializer** - The main serializer of the authors of [[models.py#Occurrence]]
+
 """
 
-
 class UserSerializer(serializers.ModelSerializer):
-    
+
     """
+    
     Takes in consideration only the id, username and if is a superuser
     Used on:
 

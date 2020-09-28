@@ -3,18 +3,18 @@
 ![Django CI](https://github.com/tomas99batista/Ubiwhere_Challenge/workflows/Django%20CI/badge.svg)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/8b53fffa7400419e9acea1b6518163ac)](https://www.codacy.com?utm_source=github.com&utm_medium=referral&utm_content=tomas99batista/Ubiwhere_Challenge&utm_campaign=Badge_Grade)
 
-# Table of Contents
+## Table of Contents
 
-- [Introduction](#Introduction)
-- [Endpoints](#Endpoints)
-- [Initial Data](#Initial_Data)
-- [Installation](#Installation)
-- [Tests](#Tests)
-- [Documentation](#Documentation)
-- [Swagger](#Swagger)
-- [Postman Collection](#Postman)
-- [Continuous Integration](#CI)
-- [Author](#Author)
+-  [Introduction](#Introduction)
+-  [Endpoints](#Endpoints)
+-  [Initial Data](#Initial_Data)
+-  [Installation](#Installation)
+-  [Tests](#Tests)
+-  [Documentation](#Documentation)
+-  [Swagger](#Swagger)
+-  [Postman Collection](#Postman)
+-  [Continuous Integration](#CI)
+-  [Author](#Author)
 
 ## Introduction
 

@@ -7,17 +7,32 @@ from django.contrib.auth.models import User
 class Occurrence(models.Model):
 
     """
+
     The Occurrence class defines the class of occurrences
     Each occurrence has  fields:
 
     """
 
     class State(models.TextChoices):
+
+        """
+        
+        Possible state choices:
+
+        """
+
         TO_VALIDATE = "To Validate"
         VALIDATED = "Validated"
         SOLVED = "Solved"
 
     class Category(models.TextChoices):
+        
+        """
+        
+        Possible Occurrence categories:
+
+        """
+        
         CONSTRUCTION = "Construction"  # Road works planned events;
         SPECIAL_EVENT = "Special Event"  # Special events (concerts, fairs, etc.);
         INCIDENT = "Incident"  # Accidents or other unexpected events;
