@@ -113,7 +113,7 @@ With the docker-compose running you can now test the endpoints with the given co
 
 **URL**: <https://documenter.getpostman.com/view/9124304/TVKHVaue>
 
-It's possible to select between 2 environments: `admin_environment`, where the user is a superuser and, therefore, can DELETE and PATCH; and `normal_user_environment`, where the access is limited to DELETE and PATCH.
+It's possible to select between 2 environments: `admin_environment`, where the user is a superuser and, therefore, can DELETE Occurrences and Users and PATCH Occurrences ; and `normal_user_environment`, where the access is limited to this 2 options.
 
 ![Postman](https://i.imgur.com/pdAQMnO.png)
 
