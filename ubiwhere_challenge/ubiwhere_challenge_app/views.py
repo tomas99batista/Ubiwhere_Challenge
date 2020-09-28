@@ -147,14 +147,7 @@ def filter_occurrences(request):
         )
         for occurrence in queryset:
             # Creates Point with the help of GEOS
-            point_database = GEOSGeometry(
-                "POINT("
-                + str(occurrence.longitude)
-                + " "
-                + str(occurrence.latitude)
-                + ")",
-                srid=4326,
-            )
+            point_database = GEOSGeometry("POINT(" + str(occurrence.longitude) + " " + str(occurrence.latitude) + ")", srid=4326,)
             # Calculate the distance from the stored point to the given point
             distance = point_database.distance(point_request)
             # If the distance from the given point to the stored point is bigger than the distance passed, exclude that point
@@ -165,13 +158,7 @@ def filter_occurrences(request):
             )
 
     # If no type of filter (category, distance or author) is passed.
-    if (
-        not category
-        and not latitude
-        and not longitude
-        and not distance_range
-        and not username
-    ):
+    if not category and not latitude and not longitude and not distance_range and not username:
         return Response(
             "BAD REQUEST: You need to pass at least one type of filter.",
             status=status.HTTP_400_BAD_REQUEST,
