@@ -35,13 +35,15 @@ We have 8 views:
  === Add New Occurence ===
 
 """
+
+
 @swagger_auto_schema(method="post", request_body=OccurrenceCreationSerializer)
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def add_new_occurrence(request):
 
     """
-   
+
     View to add a new occurrence
     Only allowed to Authenticated Users, which will be the authors of the Occurence
     """
@@ -99,7 +101,7 @@ def update_delete_get_occurrence(request, pk):
         occurrence = get_object_or_404(Occurrence.objects.all(), occurrence_id=pk)
         print(occurrence)
         serializer = OccurrenceSerializer(occurrence)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_302_FOUND)
 
 
 # === Get Occurrences Filtered ===
@@ -149,7 +151,14 @@ def filter_occurrences(request):
         )
         for occurrence in queryset:
             # Creates Point with the help of GEOS
-            point_database = GEOSGeometry("POINT(" + str(occurrence.longitude) + " " + str(occurrence.latitude) + ")", srid=4326,)
+            point_database = GEOSGeometry(
+                "POINT("
+                + str(occurrence.longitude)
+                + " "
+                + str(occurrence.latitude)
+                + ")",
+                srid=4326,
+            )
             # Calculate the distance from the stored point to the given point
             distance = point_database.distance(point_request)
             # If the distance from the given point to the stored point is bigger than the distance passed, exclude that point
@@ -160,7 +169,13 @@ def filter_occurrences(request):
             )
 
     # If no type of filter (category, distance or author) is passed.
-    if not category and not latitude and not longitude and not distance_range and not username:
+    if (
+        not category
+        and not latitude
+        and not longitude
+        and not distance_range
+        and not username
+    ):
         return Response(
             "BAD REQUEST: You need to pass at least one type of filter.",
             status=status.HTTP_400_BAD_REQUEST,
@@ -172,7 +187,7 @@ def filter_occurrences(request):
         )
 
     serializer = OccurrenceSerializer(queryset, many=True)
-    return Response(serializer.data)
+    return Response(serializer.data, status=status.HTTP_302_FOUND)
 
 
 # === Get All Occurences ===
@@ -187,8 +202,10 @@ def get_all_occurrences(request):
     """
 
     queryset = Occurrence.objects.all()
+    if not queryset:
+        return Response("No Occurrences found", status=status.HTTP_204_NO_CONTENT)
     serializer = OccurrenceSerializer(queryset, many=True)
-    return Response(serializer.data)
+    return Response(serializer.data, status=status.HTTP_302_FOUND)
 
 
 # === Register User ===
@@ -213,7 +230,7 @@ def user_register(request):
 # === Get All Users ===
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
-def retrieve_all_users(request):
+def get_all_users(request):
 
     """
 
@@ -222,8 +239,10 @@ def retrieve_all_users(request):
     """
 
     queryset = User.objects.all()
+    if not queryset:
+        return Response("No Users found", status=status.HTTP_204_NO_CONTENT)
     serializer = UserSerializer(queryset, many=True)
-    return Response(serializer.data)
+    return Response(serializer.data, status=status.HTTP_302_FOUND)
 
 
 # === Get/Delete User X ===
@@ -254,14 +273,14 @@ def get_delete_user(request, pk):
         user = get_object_or_404(User.objects.all(), id=pk)
         print(user)
         serializer = UserSerializer(user)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_302_FOUND)
 
 
 # === Index Page ===
 def index(request):
 
     """
-    
+
     View that returns HTML page with a table showing the possible endpoints,
     URLS, methods allowed, parameters, return and permissions
     """

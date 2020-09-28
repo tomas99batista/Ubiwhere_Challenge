@@ -16,7 +16,7 @@ class Occurrence(models.Model):
     class State(models.TextChoices):
 
         """
-        
+
         Possible state choices:
 
         """
@@ -26,13 +26,13 @@ class Occurrence(models.Model):
         SOLVED = "Solved"
 
     class Category(models.TextChoices):
-        
+
         """
-        
+
         Possible Occurrence categories:
 
         """
-        
+
         CONSTRUCTION = "Construction"  # Road works planned events;
         SPECIAL_EVENT = "Special Event"  # Special events (concerts, fairs, etc.);
         INCIDENT = "Incident"  # Accidents or other unexpected events;
@@ -40,7 +40,7 @@ class Occurrence(models.Model):
         ROAD_CONDITION = "Road Condition"  # Road states that affect those who drive on them (degraded pavement, holes, etc.).
 
     # **occurrence_id** - unique identifier
-    occurrence_id = models.AutoField(primary_key=True)
+    occurrence_id = models.AutoField(primary_key=True, editable=False)
     # **description** - text description
     description = models.TextField(null=False, blank=True)
     # **geographic_location** - (logintude, latitude)

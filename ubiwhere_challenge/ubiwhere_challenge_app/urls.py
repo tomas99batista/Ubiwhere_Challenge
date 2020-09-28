@@ -47,7 +47,7 @@ urlpatterns = [
     # - **POST: Register** - Register new User
     path("api/register/", views.user_register, name="user_register"),
     # - **GET: Get All Users** - Retrieves all Users
-    path("api/user/all/", views.retrieve_all_users, name="retrieve_all_users"),
+    path("api/user/all/", views.get_all_users, name="get_all_users"),
     # - **GET: Get User By ID** - Retrieves requested User
     # - **DELETE: Delete one User** - Deletes requested User - Only SuperUsers
     path("api/user/<int:pk>/", views.get_delete_user, name="get_delete_user"),

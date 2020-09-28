@@ -11,6 +11,8 @@ We have 5 Serializers:
 **OccurrenceSerializer** - The main serializer of [[models.py#Occurrence]]
 
 """
+
+
 class OccurrenceSerializer(serializers.ModelSerializer):
 
     """
@@ -56,7 +58,7 @@ class OccurrenceCreationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Occurrence
-        fields = ("description", "category", "longitude", "latitude")
+        fields = ("occurrence_id", "description", "category", "longitude", "latitude")
 
 
 """
@@ -119,10 +121,11 @@ class CreateUserSerializer(serializers.ModelSerializer):
 
 """
 
+
 class UserSerializer(serializers.ModelSerializer):
 
     """
-    
+
     Takes in consideration only the id, username and if is a superuser
     Used on:
 
