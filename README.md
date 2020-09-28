@@ -12,6 +12,7 @@
 - [Swagger](#Swagger)
 - [Postman Collection](#Postman)
 - [Continuous Integration](#CI)
+- [Author](#Author)
 
 ## Introduction
 This challenge was proposed by [Ubiwhere](https://www.ubiwhere.com/) to their backend-dev position. 
@@ -135,4 +136,4 @@ There is an workflow checking if build state on every commit to master. It can b
 
 ## Author
 Thank you,
-![Tomás Batista](https://github.com/tomas99batista)
+[Tomás Batista](https://github.com/tomas99batista)
