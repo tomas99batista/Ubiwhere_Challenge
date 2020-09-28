@@ -115,7 +115,7 @@ In order to test the endpoints (as a normal_user or as a super_user), you first 
 
 With the docker-compose running you can now test the endpoints with the given collection of Postman.
 
-`*`URL`*`: <https://documenter.getpostman.com/view/9124304/TVKHVaue>
+*URL*: <https://documenter.getpostman.com/view/9124304/TVKHVaue>
 
 It's possible to select between 2 environments: `admin_environment`, where the user is a superuser and, therefore, can DELETE and PATCH; and `normal_user_environment`, where the access is limited to DELETE and PATCH.
 
