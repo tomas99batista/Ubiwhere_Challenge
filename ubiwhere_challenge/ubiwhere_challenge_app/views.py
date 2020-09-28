@@ -258,5 +258,5 @@ def index(request):
     View that returns HTML page with a table showing the possible endpoints,
     URLS, methods allowed, parameters, return and permissions
     """
-    
+
     return render(request, "index.html")

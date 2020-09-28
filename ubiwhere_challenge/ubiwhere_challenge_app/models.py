@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 
 class Occurrence(models.Model):
-    
+
     """
     The Occurrence class defines the class of occurrences
     Each occurrence has  fields:
