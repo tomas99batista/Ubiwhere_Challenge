@@ -76,15 +76,31 @@
             <tr>
                 <td class="styled_th">Add New Occurrence</td>
                 <td>POST</td>
-                <td>api/occurrence/</td>
+                <td>api/occurrences/</td>
                 <td>Occurrence</td>
                 <td>Occurrence Created</td>
                 <td>IsAuthenticated</td>
             </tr>
             <tr>
+                <td class="styled_th">Filter Occurrence by author/category/distance</td>
+                <td>GET</td>
+                <td>api/occurrences/</td>
+                <td>Author | Category | Point + Distance Range</td>
+                <td>Occurrences</td>
+                <td>IsAuthenticated</td>
+            </tr>
+            <tr>
+                <td class="styled_th">Get All Occurrences - If no filters are passed</td>
+                <td>GET</td>
+                <td>api/occurrences/</td>
+                <td>---</td>
+                <td>All Occurrences</td>
+                <td>IsAuthenticated</td>
+            </tr>
+            <tr>
                 <td class="styled_th">Update Occurrence</td>
                 <td>PATCH</td>
-                <td>api/occurrence/int:pk/</td>
+                <td>api/occurrences/int:pk/</td>
                 <td>Occurrence.state updated value</td>
                 <td>Occurrence Updated</td>
                 <td>IsAuthenticated + IsSuperUser</td>
@@ -92,7 +108,7 @@
             <tr>
                 <td class="styled_th">Delete Occurrence</td>
                 <td>DELETE</td>
-                <td>api/occurrence/int:pk/</td>
+                <td>api/occurrences/int:pk/</td>
                 <td>Occurrence ID</td>
                 <td>---</td>
                 <td>IsAuthenticated + (IsSuperUser | IsOccurrenceOwner)</td>
@@ -100,25 +116,9 @@
             <tr>
                 <td class="styled_th">Get Occurrence By ID</td>
                 <td>GET</td>
-                <td>api/occurrence/int:pk/</td>
+                <td>api/occurrences/int:pk/</td>
                 <td>Occurrence ID</td>
                 <td>Occurrence</td>
-                <td>IsAuthenticated</td>
-            </tr>
-            <tr>
-                <td class="styled_th">Filter Occurrence by author/category/distance</td>
-                <td>GET</td>
-                <td>api/occurrence/filter/</td>
-                <td>Author | Category | Point + Distance Range</td>
-                <td>Occurrences</td>
-                <td>IsAuthenticated</td>
-            </tr>
-            <tr>
-                <td class="styled_th">Get All Occurrences</td>
-                <td>GET</td>
-                <td>api/occurrence/all/</td>
-                <td>---</td>
-                <td>All Occurrences</td>
                 <td>IsAuthenticated</td>
             </tr>
             <tr>
@@ -148,7 +148,7 @@
             <tr>
                 <td class="styled_th">Get User By ID</td>
                 <td>GET</td>
-                <td>api/user/int:pk/</td>
+                <td>api/users/int:pk/</td>
                 <td>User ID</td>
                 <td>User</td>
                 <td>IsAuthenticated</td>
@@ -156,7 +156,7 @@
             <tr>
                 <td class="styled_th">Delete User By ID</td>
                 <td>DELETE</td>
-                <td>api/user/int:pk/</td>
+                <td>api/users/int:pk/</td>
                 <td>User ID</td>
                 <td>---</td>
                 <td>IsAuthenticated + IsSuperUser</td>

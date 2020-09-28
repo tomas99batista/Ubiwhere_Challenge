@@ -59,7 +59,7 @@
         <a class='octothorpe' href='#section-2'>#</a>
       </div>
       <p>The urls are the endpoints to access the API and the index page
-We have 9 urls:</p>
+We have 6 API urls:</p>
     </div>
     <div class='code'>
       <div class="highlight"><pre><span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span></pre></div>
@@ -72,10 +72,12 @@ We have 9 urls:</p>
         <a class='octothorpe' href='#section-3'>#</a>
       </div>
       <p><strong>API URLS</strong> - The urls for the Occurrence  <a href="models.html#Occurrence">models.py</a>
-- <strong>POST: Add Occurrence</strong> - Create a new Occurrence</p>
+- <strong>POST: Add Occurrence</strong> - Create a new Occurrence
+- <strong>GET: Filter Occurrences ?filter=value </strong> - Gets the Occurrences filtered by author/caregory/distance to given point
+- <strong>GET: Get All Occurrences</strong> - Retrieves all Occurrences - If no filters are passed</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;api/occurrence/&quot;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">add_new_occurrence</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;add_new_occurrence&quot;</span><span class="p">),</span></pre></div>
+      <div class="highlight"><pre>    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;api/occurrences/&quot;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">occurrences_view</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;occurrences_view&quot;</span><span class="p">),</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -92,9 +94,9 @@ We have 9 urls:</p>
     </div>
     <div class='code'>
       <div class="highlight"><pre>    <span class="n">path</span><span class="p">(</span>
-        <span class="s2">&quot;api/occurrence/&lt;int:pk&gt;/&quot;</span><span class="p">,</span>
-        <span class="n">views</span><span class="o">.</span><span class="n">update_delete_get_occurrence</span><span class="p">,</span>
-        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;update_delete_get_occurrence&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;api/occurrences/&lt;int:pk&gt;/&quot;</span><span class="p">,</span>
+        <span class="n">views</span><span class="o">.</span><span class="n">occurrences_by_id_view</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;occurrences_by_id_view&quot;</span><span class="p">,</span>
     <span class="p">),</span></pre></div>
     </div>
   </div>
@@ -104,12 +106,11 @@ We have 9 urls:</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-5'>#</a>
       </div>
-      <ul>
-<li><strong>GET: Filter Occurrences</strong> - Gets the Occurrences filtered by author/caregory/distance to given point</li>
-</ul>
+      <p><strong>USER URLS</strong> - The urls for the User (author  <a href="models.html#Occurrence">models.py</a>)
+- <strong>POST: Login</strong> - Retrieves Auth Token</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;api/occurrence/filter/&quot;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">filter_occurrences</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;filter_occurrences&quot;</span><span class="p">),</span></pre></div>
+      <div class="highlight"><pre>    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;api/login/&quot;</span><span class="p">,</span> <span class="n">jwt_views</span><span class="o">.</span><span class="n">TokenObtainPairView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;login&quot;</span><span class="p">),</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -119,11 +120,11 @@ We have 9 urls:</p>
         <a class='octothorpe' href='#section-6'>#</a>
       </div>
       <ul>
-<li><strong>GET: Get All Occurrences</strong> - Retrieves all Occurrences</li>
+<li><strong>POST: Register</strong> - Register new User</li>
 </ul>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;api/occurrence/all/&quot;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">get_all_occurrences</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;get_all_occurrences&quot;</span><span class="p">),</span></pre></div>
+      <div class="highlight"><pre>    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;api/register/&quot;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">user_register_view</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;user_register_view&quot;</span><span class="p">),</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -132,11 +133,12 @@ We have 9 urls:</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-7'>#</a>
       </div>
-      <p><strong>AUTH URLS</strong> - The urls for the User (author  <a href="models.html#Occurrence">models.py</a>)
-- <strong>POST: Login</strong> - Retrieves Auth Token</p>
+      <ul>
+<li><strong>GET: Get All Users</strong> - Retrieves all Users</li>
+</ul>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;api/login/&quot;</span><span class="p">,</span> <span class="n">jwt_views</span><span class="o">.</span><span class="n">TokenObtainPairView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;login&quot;</span><span class="p">),</span></pre></div>
+      <div class="highlight"><pre>    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;api/users/&quot;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">get_all_users_view</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;get_all_users_view&quot;</span><span class="p">),</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -146,11 +148,12 @@ We have 9 urls:</p>
         <a class='octothorpe' href='#section-8'>#</a>
       </div>
       <ul>
-<li><strong>POST: Register</strong> - Register new User</li>
+<li><strong>GET: Get User By ID</strong> - Retrieves requested User</li>
+<li><strong>DELETE: Delete one User</strong> - Deletes requested User - Only SuperUsers</li>
 </ul>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;api/register/&quot;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">user_register</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;user_register&quot;</span><span class="p">),</span></pre></div>
+      <div class="highlight"><pre>    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;api/users/&lt;int:pk&gt;/&quot;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">user_by_id_view</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;user_by_id_view&quot;</span><span class="p">),</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -159,12 +162,10 @@ We have 9 urls:</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-9'>#</a>
       </div>
-      <ul>
-<li><strong>GET: Get All Users</strong> - Retrieves all Users</li>
-</ul>
+      <p><strong>TEMPLATE URLS</strong> - The URLS for HTML pages</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;api/user/all/&quot;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">retrieve_all_users</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;retrieve_all_users&quot;</span><span class="p">),</span></pre></div>
+      <div class="highlight"><pre>    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;index&quot;</span><span class="p">),</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -173,34 +174,7 @@ We have 9 urls:</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-10'>#</a>
       </div>
-      <ul>
-<li><strong>GET: Get User By ID</strong> - Retrieves requested User</li>
-<li><strong>DELETE: Delete one User</strong> - Deletes requested User - Only SuperUsers</li>
-</ul>
-    </div>
-    <div class='code'>
-      <div class="highlight"><pre>    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;api/user/&lt;int:pk&gt;/&quot;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">get_delete_user</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;get_delete_user&quot;</span><span class="p">),</span></pre></div>
-    </div>
-  </div>
-  <div class='clearall'></div>
-  <div class='section' id='section-11'>
-    <div class='docs'>
-      <div class='octowrap'>
-        <a class='octothorpe' href='#section-11'>#</a>
-      </div>
-      <p><strong>TEMPLATE URLS</strong> - The URLS for HTML pages</p>
-    </div>
-    <div class='code'>
-      <div class="highlight"><pre>    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;index&quot;</span><span class="p">),</span></pre></div>
-    </div>
-  </div>
-  <div class='clearall'></div>
-  <div class='section' id='section-12'>
-    <div class='docs'>
-      <div class='octowrap'>
-        <a class='octothorpe' href='#section-12'>#</a>
-      </div>
-      <p>Swagger URLS</p>
+      <p><strong>SWAGGER URLS</strong></p>
     </div>
     <div class='code'>
       <div class="highlight"><pre>    <span class="n">url</span><span class="p">(</span>

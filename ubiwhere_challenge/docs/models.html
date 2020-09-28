@@ -67,13 +67,10 @@ Each occurrence has  fields:</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-4'>#</a>
       </div>
-      
+      <p>Possible state choices:</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="k">class</span> <span class="nc">State</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">TextChoices</span><span class="p">):</span>
-        <span class="n">TO_VALIDATE</span> <span class="o">=</span> <span class="s2">&quot;To Validate&quot;</span>
-        <span class="n">VALIDATED</span> <span class="o">=</span> <span class="s2">&quot;Validated&quot;</span>
-        <span class="n">SOLVED</span> <span class="o">=</span> <span class="s2">&quot;Solved&quot;</span></pre></div>
+      <div class="highlight"><pre>    <span class="k">class</span> <span class="nc">State</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">TextChoices</span><span class="p">):</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -85,12 +82,9 @@ Each occurrence has  fields:</p>
       
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="k">class</span> <span class="nc">Category</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">TextChoices</span><span class="p">):</span>
-        <span class="n">CONSTRUCTION</span> <span class="o">=</span> <span class="s2">&quot;Construction&quot;</span>  <span class="c1"># Road works planned events;</span>
-        <span class="n">SPECIAL_EVENT</span> <span class="o">=</span> <span class="s2">&quot;Special Event&quot;</span>  <span class="c1"># Special events (concerts, fairs, etc.);</span>
-        <span class="n">INCIDENT</span> <span class="o">=</span> <span class="s2">&quot;Incident&quot;</span>  <span class="c1"># Accidents or other unexpected events;</span>
-        <span class="n">WHEATHER_CONDITION</span> <span class="o">=</span> <span class="s2">&quot;Weather Condition&quot;</span>  <span class="c1"># Weather events that affect roads;</span>
-        <span class="n">ROAD_CONDITION</span> <span class="o">=</span> <span class="s2">&quot;Road Condition&quot;</span>  <span class="c1"># Road states that affect those who drive on them (degraded pavement, holes, etc.).</span></pre></div>
+      <div class="highlight"><pre>        <span class="n">TO_VALIDATE</span> <span class="o">=</span> <span class="s2">&quot;To Validate&quot;</span>
+        <span class="n">VALIDATED</span> <span class="o">=</span> <span class="s2">&quot;Validated&quot;</span>
+        <span class="n">SOLVED</span> <span class="o">=</span> <span class="s2">&quot;Solved&quot;</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -99,10 +93,10 @@ Each occurrence has  fields:</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-6'>#</a>
       </div>
-      <p><strong>occurrence_id</strong> - unique identifier</p>
+      <p>Possible Occurrence categories:</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="n">occurrence_id</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">AutoField</span><span class="p">(</span><span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></pre></div>
+      <div class="highlight"><pre>    <span class="k">class</span> <span class="nc">Category</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">TextChoices</span><span class="p">):</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -111,10 +105,14 @@ Each occurrence has  fields:</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-7'>#</a>
       </div>
-      <p><strong>description</strong> - text description</p>
+      
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="n">description</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></pre></div>
+      <div class="highlight"><pre>        <span class="n">CONSTRUCTION</span> <span class="o">=</span> <span class="s2">&quot;Construction&quot;</span>  <span class="c1"># Road works planned events;</span>
+        <span class="n">SPECIAL_EVENT</span> <span class="o">=</span> <span class="s2">&quot;Special Event&quot;</span>  <span class="c1"># Special events (concerts, fairs, etc.);</span>
+        <span class="n">INCIDENT</span> <span class="o">=</span> <span class="s2">&quot;Incident&quot;</span>  <span class="c1"># Accidents or other unexpected events;</span>
+        <span class="n">WHEATHER_CONDITION</span> <span class="o">=</span> <span class="s2">&quot;Weather Condition&quot;</span>  <span class="c1"># Weather events that affect roads;</span>
+        <span class="n">ROAD_CONDITION</span> <span class="o">=</span> <span class="s2">&quot;Road Condition&quot;</span>  <span class="c1"># Road states that affect those who drive on them (degraded pavement, holes, etc.).</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -122,6 +120,30 @@ Each occurrence has  fields:</p>
     <div class='docs'>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-8'>#</a>
+      </div>
+      <p><strong>occurrence_id</strong> - unique identifier</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="n">occurrence_id</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">AutoField</span><span class="p">(</span><span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">editable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-9'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-9'>#</a>
+      </div>
+      <p><strong>description</strong> - text description</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="n">description</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-10'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-10'>#</a>
       </div>
       <p><strong>geographic_location</strong> - (logintude, latitude)
 <strong>longitude</strong></p>
@@ -131,10 +153,10 @@ Each occurrence has  fields:</p>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-9'>
+  <div class='section' id='section-11'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-9'>#</a>
+        <a class='octothorpe' href='#section-11'>#</a>
       </div>
       <p><strong>longitude</strong></p>
     </div>
@@ -143,10 +165,10 @@ Each occurrence has  fields:</p>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-10'>
+  <div class='section' id='section-12'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-10'>#</a>
+        <a class='octothorpe' href='#section-12'>#</a>
       </div>
       <p><strong>author</strong> - creator of the occurrence</p>
     </div>
@@ -155,10 +177,10 @@ Each occurrence has  fields:</p>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-11'>
+  <div class='section' id='section-13'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-11'>#</a>
+        <a class='octothorpe' href='#section-13'>#</a>
       </div>
       <p><strong>creation_timestamp</strong> - timestamp of the creation</p>
     </div>
@@ -167,10 +189,10 @@ Each occurrence has  fields:</p>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-12'>
+  <div class='section' id='section-14'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-12'>#</a>
+        <a class='octothorpe' href='#section-14'>#</a>
       </div>
       <p><strong>update_timestamp</strong> - timestamp of the last update</p>
     </div>
@@ -179,10 +201,10 @@ Each occurrence has  fields:</p>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-13'>
+  <div class='section' id='section-15'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-13'>#</a>
+        <a class='octothorpe' href='#section-15'>#</a>
       </div>
       <p><strong>state</strong> - actual state</p>
     </div>
@@ -193,10 +215,10 @@ Each occurrence has  fields:</p>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-14'>
+  <div class='section' id='section-16'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-14'>#</a>
+        <a class='octothorpe' href='#section-16'>#</a>
       </div>
       <p><strong>category</strong> - occurrence category</p>
     </div>
@@ -207,10 +229,10 @@ Each occurrence has  fields:</p>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-15'>
+  <div class='section' id='section-17'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-15'>#</a>
+        <a class='octothorpe' href='#section-17'>#</a>
       </div>
       
     </div>

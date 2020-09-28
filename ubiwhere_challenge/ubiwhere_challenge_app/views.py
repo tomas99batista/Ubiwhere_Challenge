@@ -21,16 +21,17 @@ from .models import Occurrence
 
 """
 All the @api_view for our application
-We have 8 views:
+We have 6 views:
 
-1. **Add New Occurence** - POST a new Occurrence [[views.py#add_new_occurrence]]
-2. **Update/Delete/Get Occurence X** - PATCH/DELETE/GET a given Occurrence [[views.py#update_delete_get_occurrence]]
-3. **Get Occurrences Filtered** - GET Occurrences filtered by author/category/point + distance range [[views.py#filter_occurrences]]
-4. **Get All Occurences** - GET all Occurrences [[views.py#get_all_occurrences]]
-5. **Register User** - POST a new User [[views.py#user_register]]
-6. **Get All Users** - GET all Users [[views.py#retrieve_all_users]]
-7. **Get/Delete User X** - GET/DELETE a given User [[views.py#get_delete_user]]
-8. **Index Page** - returns a webpage with a table to consult all endpoints, how to call, parameters, return and permissions [[views.py#index]]
+1. **occurrences_view** 
+    - POST a new Occurrence [[views.py#add_new_occurrence]]
+    - GET All Occurrences [[views.py#add_new_occurrence]]
+    - GET ?filter=value filter Occurrences [[views.py#add_new_occurrence]]
+2. **occurrences_by_id_view** - PATCH/DELETE/GET a requested Occurrence [[views.py#update_delete_get_occurrence]]
+3. **user_register_view** - POST Register a new User [[views.py#user_register]]
+4. **get_all_users_view** - GET all Users [[views.py#retrieve_all_users]]
+5. **user_by_id_view** - GET/DELETE requested User [[views.py#get_delete_user]]
+6. **Index Page** - returns a webpage with a table to consult all endpoints, how to call, parameters, return and permissions [[views.py#index]]
 
  === Add New Occurence ===
 
@@ -38,9 +39,9 @@ We have 8 views:
 
 
 @swagger_auto_schema(method="post", request_body=OccurrenceCreationSerializer)
-@api_view(["POST"])
+@api_view(["POST", "GET"])
 @permission_classes([IsAuthenticated])
-def add_new_occurrence(request):
+def occurrences_view(request):
 
     """
 
@@ -48,18 +49,110 @@ def add_new_occurrence(request):
     Only allowed to Authenticated Users, which will be the authors of the Occurence
     """
     user = request.user
-    serializer = OccurrenceCreationSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save(author=user)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    if request.method == "POST":
+        serializer = OccurrenceCreationSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(author=user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    """
+
+    View where is possible to filter the Occurences pretended by:
+
+    - author: passing the username
+    - category: from the valid ones
+    - distance: passing a POINT(longitude latitude) and the range pretended from that point
+
+    If no filter is passed, ALL occurrences are returned
+    
+    Only allowed to Authenticated Users.
+    """
+
+    if request.method == "GET":
+
+        queryset = Occurrence.objects.all()
+
+        # Filter by category
+        category = request.query_params.get("category", None)
+        queryset = (
+            queryset.filter(category=category) if category is not None else queryset
+        )
+
+        # Filter by author
+        username = request.query_params.get("username", None)
+        queryset = (
+            queryset.filter(author__username=username)
+            if username is not None
+            else queryset
+        )
+
+        # Filter by distance
+        latitude = request.query_params.get("latitude", None)
+        longitude = request.query_params.get("longitude", None)
+        distance_range = request.query_params.get("range", None)
+        # If the 3 arguments to the distance filter are passed
+        if latitude or longitude or distance_range:
+            # If not all 3 (latitude, longitude and distance) distance filters are passed.
+            # an bad request error is generated
+            if not latitude and not longitude and not distance_range:
+                return Response(
+                    "BAD REQUEST: Distance filter needs a latitude, a longitude and a distance range.",
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+            # Create a point from the given longitude and latitude
+            point_request = GEOSGeometry(
+                "POINT(" + str(longitude) + " " + str(latitude) + ")", srid=4326
+            )
+            for occurrence in queryset:
+                # Creates Point with the help of GEOS
+                point_database = GEOSGeometry(
+                    "POINT("
+                    + str(occurrence.longitude)
+                    + " "
+                    + str(occurrence.latitude)
+                    + ")",
+                    srid=4326,
+                )
+                # Calculate the distance from the stored point to the given point
+                distance = point_database.distance(point_request)
+                # If the distance from the given point to the stored point is bigger than the distance passed, exclude that point
+                queryset = (
+                    queryset.exclude(occurrence_id=occurrence.occurrence_id)
+                    if distance > float(distance_range)
+                    else queryset
+                )
+
+        if not queryset:
+            return Response(
+                "No data found for the given filters", status=status.HTTP_404_NOT_FOUND
+            )
+
+        # If no type of filter (category, distance or author) is passed, RETURN ALL
+        if (
+            not category
+            and not latitude
+            and not longitude
+            and not distance_range
+            and not username
+        ):
+            occurrences = Occurrence.objects.all()
+            if not occurrences:
+                return Response(
+                    "No data on occurrences", status=status.HTTP_404_NOT_FOUND
+                )
+            serializer = OccurrenceSerializer(occurrences, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        serializer = OccurrenceSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 # === Update/Delete/Get Occurence X ===
 @swagger_auto_schema(method="patch", request_body=OccurrencePatchSerializer)
 @api_view(["PATCH", "DELETE", "GET"])
 @permission_classes([IsAuthenticated])
-def update_delete_get_occurrence(request, pk):
+def occurrences_by_id_view(request, pk):
 
     """
 
@@ -83,7 +176,7 @@ def update_delete_get_occurrence(request, pk):
         )
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     if request.method == "DELETE":
         user = request.user
@@ -91,7 +184,7 @@ def update_delete_get_occurrence(request, pk):
         # Superuser or author can delete instance
         if occurrence.author == user or user.is_superuser:
             occurrence.delete()
-            return Response("Occurrence deleted", status=status.HTTP_204_NO_CONTENT)
+            return Response("Occurrence deleted", status=status.HTTP_200_OK)
         else:
             return Response(
                 "Only superusers or creators allowed to delete occurrences",
@@ -99,120 +192,15 @@ def update_delete_get_occurrence(request, pk):
             )
     if request.method == "GET":
         occurrence = get_object_or_404(Occurrence.objects.all(), occurrence_id=pk)
-        print(occurrence)
         serializer = OccurrenceSerializer(occurrence)
-        return Response(serializer.data, status=status.HTTP_302_FOUND)
-
-
-# === Get Occurrences Filtered ===
-@api_view(["GET"])
-@permission_classes([IsAuthenticated])
-def filter_occurrences(request):
-
-    """
-
-    View where is possible to filter the Occurences pretended by:
-
-    - author: passing the username
-    - category: from the valid ones
-    - distance: passing a POINT(longitude latitude) and the range pretended from that point
-
-    Only allowed to Authenticated Users
-    """
-
-    queryset = Occurrence.objects.all()
-
-    # Filter by category
-    category = request.query_params.get("category", None)
-    queryset = queryset.filter(category=category) if category is not None else queryset
-
-    # Filter by author
-    username = request.query_params.get("username", None)
-    queryset = (
-        queryset.filter(author__username=username) if username is not None else queryset
-    )
-
-    # Filter by distance
-    latitude = request.query_params.get("latitude", None)
-    longitude = request.query_params.get("longitude", None)
-    distance_range = request.query_params.get("range", None)
-    # If the 3 arguments to the distance filter are passed
-    if latitude or longitude or distance_range:
-        # If not all 3 (latitude, longitude and distance) distance filters are passed.
-        # an bad request error is generated
-        if not latitude and not longitude and not distance_range:
-            return Response(
-                "BAD REQUEST: Distance filter needs a latitude, a longitude and a distance range.",
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-        # Create a point from the given longitude and latitude
-        point_request = GEOSGeometry(
-            "POINT(" + str(longitude) + " " + str(latitude) + ")", srid=4326
-        )
-        for occurrence in queryset:
-            # Creates Point with the help of GEOS
-            point_database = GEOSGeometry(
-                "POINT("
-                + str(occurrence.longitude)
-                + " "
-                + str(occurrence.latitude)
-                + ")",
-                srid=4326,
-            )
-            # Calculate the distance from the stored point to the given point
-            distance = point_database.distance(point_request)
-            # If the distance from the given point to the stored point is bigger than the distance passed, exclude that point
-            queryset = (
-                queryset.exclude(occurrence_id=occurrence.occurrence_id)
-                if distance > float(distance_range)
-                else queryset
-            )
-
-    # If no type of filter (category, distance or author) is passed.
-    if (
-        not category
-        and not latitude
-        and not longitude
-        and not distance_range
-        and not username
-    ):
-        return Response(
-            "BAD REQUEST: You need to pass at least one type of filter.",
-            status=status.HTTP_400_BAD_REQUEST,
-        )
-
-    if not queryset:
-        return Response(
-            "No data found for the given filters", status=status.HTTP_204_NO_CONTENT
-        )
-
-    serializer = OccurrenceSerializer(queryset, many=True)
-    return Response(serializer.data, status=status.HTTP_302_FOUND)
-
-
-# === Get All Occurences ===
-@api_view(["GET"])
-@permission_classes([IsAuthenticated])
-def get_all_occurrences(request):
-
-    """
-
-    View where is possible to obtain all Occurrences
-    Only allowed to Authenticated Users
-    """
-
-    queryset = Occurrence.objects.all()
-    if not queryset:
-        return Response("No Occurrences found", status=status.HTTP_204_NO_CONTENT)
-    serializer = OccurrenceSerializer(queryset, many=True)
-    return Response(serializer.data, status=status.HTTP_302_FOUND)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 # === Register User ===
 @swagger_auto_schema(method="post", request_body=CreateUserSerializer)
 @api_view(["POST"])
 @permission_classes([AllowAny])
-def user_register(request):
+def user_register_view(request):
 
     """
 
@@ -230,7 +218,7 @@ def user_register(request):
 # === Get All Users ===
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
-def get_all_users(request):
+def get_all_users_view(request):
 
     """
 
@@ -240,15 +228,15 @@ def get_all_users(request):
 
     queryset = User.objects.all()
     if not queryset:
-        return Response("No Users found", status=status.HTTP_204_NO_CONTENT)
+        return Response("No Users found", status=status.HTTP_404_NOT_FOUND)
     serializer = UserSerializer(queryset, many=True)
-    return Response(serializer.data, status=status.HTTP_302_FOUND)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 # === Get/Delete User X ===
 @api_view(["GET", "DELETE"])
 @permission_classes([IsAuthenticated])
-def get_delete_user(request, pk):
+def user_by_id_view(request, pk):
 
     """
 
@@ -263,7 +251,7 @@ def get_delete_user(request, pk):
         # Superuser or author can delete instance
         if user_request.is_superuser:
             user_instance.delete()
-            return Response("User deleted", status=status.HTTP_204_NO_CONTENT)
+            return Response("User deleted", status=status.HTTP_200_OK)
         else:
             return Response(
                 "Only superusers allowed to delete other users",
@@ -271,9 +259,8 @@ def get_delete_user(request, pk):
             )
     if request.method == "GET":
         user = get_object_or_404(User.objects.all(), id=pk)
-        print(user)
         serializer = UserSerializer(user)
-        return Response(serializer.data, status=status.HTTP_302_FOUND)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 # === Index Page ===
