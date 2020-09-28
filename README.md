@@ -7,12 +7,12 @@
 
 -  [Introduction](#Introduction)
 -  [Endpoints](#Endpoints)
+-  [Postman Collection](#Postman)
 -  [Initial Data](#Initial_Data)
 -  [Installation](#Installation)
 -  [Tests](#Tests)
 -  [Documentation](#Documentation)
 -  [Swagger](#Swagger)
--  [Postman Collection](#Postman)
 -  [Continuous Integration](#CI)
 -  [Author](#Author)
 
@@ -61,6 +61,13 @@ It's an API to manage Occurrences.
 
 - `<ip_addr>:8000/`
   ![EndPoints](https://i.imgur.com/ayIHvT1.png)
+  
+### Swagger
+
+There is a swagger available on `<ip_addr>:8000/swagger/`.
+In order to test the endpoints (as a normal_user or as a super_user), you first must obtain the Auth Token by logging in (using the endpoint on Swagger) and then go to "Authorize", insert the the token, saving as: `Bearer <Token>`, as seen on image:
+
+![Saving Auth Token](https://i.imgur.com/bK2SlLh.png)
 
 ## Initial_Data
 
@@ -100,12 +107,6 @@ Clone this repo to your local machine using https://github.com/tomas99batista/Ub
 
 `docker-compose down -v`
 
-## Swagger
-
-There is a swagger available on `<ip_addr>:8000/swagger/`.
-In order to test the endpoints (as a normal_user or as a super_user), you first must obtain the Auth Token by logging in (using the endpoint on Swagger) and then go to "Authorize", insert the the token, saving as: `Bearer <Token>`, as seen on image:
-
-![Saving Auth Token](https://i.imgur.com/bK2SlLh.png)
 
 ## Postman
 
