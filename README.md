@@ -7,7 +7,7 @@
 
 -  [Introduction](#Introduction)
 -  [Endpoints](#Endpoints)
--  [Postman Collection](#Postman)
+  -  [Postman Collection](#Postman)
 -  [Initial Data](#Initial_Data)
 -  [Installation](#Installation)
 -  [Tests](#Tests)
