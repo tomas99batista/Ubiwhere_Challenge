@@ -137,12 +137,16 @@ def filter_occurrences(request):
                 status=status.HTTP_400_BAD_REQUEST,
             )
         # Create a point from the given longitude and latitude
-        point = GEOSGeometry(
+        point_request = GEOSGeometry(
             "POINT(" + str(longitude) + " " + str(latitude) + ")", srid=4326
         )
         for occurrence in queryset:
+            # Creates Point with the help of GEOS
+            point_database = GEOSGeometry(
+            "POINT(" + str(occurrence.longitude) + " " + str(occurrence.latitude) + ")", srid=4326
+            )
             # Calculate the distance from the stored point to the given point
-            distance = occurrence.geographic_location.distance(point)
+            distance = point_database.distance(point_request)
             # If the distance from the given point to the stored point is bigger than the distance passed, exclude that point
             queryset = (
                 queryset.exclude(occurrence_id=occurrence.occurrence_id)

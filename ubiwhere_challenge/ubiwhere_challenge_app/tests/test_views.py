@@ -70,7 +70,8 @@ class OccurrenceAPITest(APITestCase):
             {
                 "description": "Teste Add Occurrence",
                 "category": "Construction",
-                "geographic_location": "POINT(40.4585932 -7.943708)",
+                "longitude" : 40,
+                "latitude": -7,
             },
             format="json",
         )
@@ -84,7 +85,8 @@ class OccurrenceAPITest(APITestCase):
             {
                 "description": "Teste Add Occurrence",
                 "category": "Construction",
-                "geographic_location": "POINT(40.4585932 -7.943708)",
+                "longitude" : 40,
+                "latitude": -7,
             },
             format="json",
         )
@@ -102,7 +104,8 @@ class OccurrenceAPITest(APITestCase):
             {
                 "description": "Teste Add Occurrence",
                 "category": "Construction",
-                "geographic_location": "POINT(40.4585932 -7.943708)",
+                "longitude" : 40,
+                "latitude": -7,
             },
             format="json",
         )

@@ -15,7 +15,7 @@ We have 5 Serializers:
 """
 
 
-class OccurrenceSerializer(GeoFeatureModelSerializer):
+class OccurrenceSerializer(serializers.ModelSerializer):
     """
     Takes in consideration all fields
     Used on:
@@ -28,7 +28,6 @@ class OccurrenceSerializer(GeoFeatureModelSerializer):
 
     class Meta:
         model = Occurrence
-        geo_field = "geographic_location"
         fields = (
             "occurrence_id",
             "description",
@@ -37,6 +36,8 @@ class OccurrenceSerializer(GeoFeatureModelSerializer):
             "state",
             "category",
             "author",
+            "longitude", 
+            "latitude"
         )
 
 
@@ -45,7 +46,7 @@ class OccurrenceSerializer(GeoFeatureModelSerializer):
 """
 
 
-class OccurrenceCreationSerializer(GeoFeatureModelSerializer):
+class OccurrenceCreationSerializer(serializers.ModelSerializer):
     """
     Takes in consideration only the geo_field, description and category
     Used on:
@@ -56,8 +57,7 @@ class OccurrenceCreationSerializer(GeoFeatureModelSerializer):
 
     class Meta:
         model = Occurrence
-        geo_field = "geographic_location"
-        fields = ("description", "category")
+        fields = ("description", "category", "longitude", "latitude")
 
 
 """

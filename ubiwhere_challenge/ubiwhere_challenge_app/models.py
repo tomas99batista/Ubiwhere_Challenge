@@ -1,4 +1,4 @@
-from django.contrib.gis.db import models
+from django.db import models
 from django.contrib.auth.models import User
 
 # === Models for Occurrences ===
@@ -27,8 +27,11 @@ class Occurrence(models.Model):
     occurrence_id = models.AutoField(primary_key=True)
     # **description** - text description
     description = models.TextField(null=False, blank=True)
-    # **geographic_location** - PointField with the location
-    geographic_location = models.PointField(blank=True)
+    # **geographic_location** - (logintude, latitude)
+    # **longitude**
+    longitude = models.FloatField(null=False, blank=True)
+    # **longitude**
+    latitude = models.FloatField(null=False, blank=True)
     # **author** - creator of the occurrence
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     # **creation_timestamp** - timestamp of the creation
@@ -46,6 +49,6 @@ class Occurrence(models.Model):
 
     def __str__(self):
 
-        return f"ID: {self.occurrence_id}, Description: {self.description}, Location: {self.geographic_location}, \
+        return f"ID: {self.occurrence_id}, Description: {self.description}, Location: ({self.longitude}, {self.latitude}), \
                 Author: {self.author.username}, State: {self.get_state_display()}, Category: {self.get_category_display()}, \
                 Creation: {self.creation_timestamp}, Update: {self.update_timestamp}"

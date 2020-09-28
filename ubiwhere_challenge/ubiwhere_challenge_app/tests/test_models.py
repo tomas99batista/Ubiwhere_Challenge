@@ -13,7 +13,8 @@ class OccurrenceModelTest(TestCase):
     def setUp(self):
         self.occurrence = Occurrence.objects.create(
             description="Occurence - CONSTRUCTION - initial data, created by a initial user",
-            geographic_location="POINT(25 -14)",
+            longitude=25,
+            latitude=14,
             author=User.objects.create_user(
                 "userteste", "userteste@example.com", "userteste"
             ),
