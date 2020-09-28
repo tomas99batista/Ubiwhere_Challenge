@@ -18,7 +18,7 @@
 
 ## Introduction
 This challenge was proposed by [Ubiwhere](https://www.ubiwhere.com/) to their backend-dev position. 
-Developed in Python/Django, with the support of Django Rest Framework, JWT, Postgres + Postgis, Docker and Gunicorn.
+Developed in Python/Django, with the support of Django Rest Framework, JWT, Postgres + Postgis and Docker.
 It's an API to manage Occurrences.
 
 ## Installation
