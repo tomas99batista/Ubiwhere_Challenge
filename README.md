@@ -9,9 +9,10 @@
 - [Initial Data](#Initial_Data)
 - [Tests](#Tests)
 - [Documentation](#Documentation)
-    - [Swagger](#Swagger)
+- [Swagger](#Swagger)
 - [Postman Collection](#Postman)
 - [Continuous Integration](#CI)
+- [Author](#Author)
 
 ## Introduction
 This challenge was proposed by [Ubiwhere](https://www.ubiwhere.com/) to their backend-dev position. 
@@ -114,7 +115,7 @@ There are 2 types of tests: tests to the Occurence model (`tests/test_models.py`
 ## Documentation
 Available on `ubiwhere_challenge/docs/` there is documentation for the `models`, `serializers`, `views` and `urls`
 
-### Swagger
+## Swagger
 There is an swagger available on `<ip_addr>:8000/swagger/`. 
 In order to test the endpoints (as a normal_user or as a super_user), you first must obtain the Auth Token by logging in (using the endpoint on Swagger) and then go to "Authorize", insert the the token, saving as: `Bearer <Token>`, as seen on image:
 
@@ -124,7 +125,15 @@ In order to test the endpoints (as a normal_user or as a super_user), you first 
 ## Postman
 With the docker-compose running you can now test the endpoints with the given collection of Postman.
 
-__URL__: <>
+__URL__: https://documenter.getpostman.com/view/9124304/TVKHVaue
+
+It's possible to select between 2 environments: `admin_environment`, where the user is a superuser and, therefore, can DELETE and PATCH; and `normal_user_environment`, where the access is limited to DELETE and PATCH.
+
+![Postman](https://i.imgur.com/pdAQMnO.png)
 
 ## CI
 There is an workflow checking if build state on every commit to master. It can be seen on https://github.com/tomas99batista/Ubiwhere_Challenge/actions
+
+## Author
+Thank you,
+[Tomás Batista](https://github.com/tomas99batista)
