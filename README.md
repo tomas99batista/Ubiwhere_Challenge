@@ -64,6 +64,7 @@ It's an API to manage Occurrences.
 ![EndPoints](https://i.imgur.com/jqPmvPY.png)
 
 ## Initial_Data
+You can always access `<ip_addr>:8000/admin/` to see the data.
 
 ### Occurrences
 `{
@@ -111,7 +112,7 @@ Clone this repo to your local machine using https://github.com/tomas99batista/Ub
 `docker-compose down -v`
 
 ## Swagger
-There is an swagger available on `<ip_addr>:8000/swagger/`. 
+There is a swagger available on `<ip_addr>:8000/swagger/`. 
 In order to test the endpoints (as a normal_user or as a super_user), you first must obtain the Auth Token by logging in (using the endpoint on Swagger) and then go to "Authorize", insert the the token, saving as: `Bearer <Token>`, as seen on image:
 
 ![Saving Auth Token](https://i.imgur.com/bK2SlLh.png)
@@ -129,7 +130,7 @@ It's possible to select between 2 environments: `admin_environment`, where the u
 There are 2 types of tests: tests to the Occurence model (`tests/test_models.py`) and to the API views (`tests/test_views.py`).
 
 ## Documentation
-Available on `ubiwhere_challenge/docs/` there is documentation for the `models`, `serializers`, `views` and `urls`
+Available on `ubiwhere_challenge/docs/` there is documentation for the `models`, `serializers`, `views` and `urls`.
 
 ## CI
 There is an workflow checking if build state on every commit to master. It can be seen on https://github.com/tomas99batista/Ubiwhere_Challenge/actions
