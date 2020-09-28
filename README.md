@@ -132,3 +132,7 @@ It's possible to select between 2 environments: `admin_environment`, where the u
 
 ## CI
 There is an workflow checking if build state on every commit to master. It can be seen on https://github.com/tomas99batista/Ubiwhere_Challenge/actions
+
+## Author
+Thank you,
+![Tomás Batista](https://github.com/tomas99batista)
