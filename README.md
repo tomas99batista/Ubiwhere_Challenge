@@ -12,8 +12,8 @@
 -  [Tests](#Tests)
 -  [Documentation](#Documentation)
 -  [Swagger](#Swagger)
--    [Postman Collection](#Postman)
--    [Continuous Integration](#CI)
+-  [Postman Collection](#Postman)
+-  [Continuous Integration](#CI)
 -  [Author](#Author)
 
 ## Introduction
