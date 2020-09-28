@@ -69,7 +69,7 @@ def update_delete_get_occurrence(request, pk):
         if not user.is_superuser:
             return Response(
                 "Only superusers are allowed to update occurrences",
-                status=status.HTTP_400_BAD_REQUEST,
+                status=status.HTTP_401_UNAUTHORIZED,
             )
         occurrence = get_object_or_404(Occurrence.objects.all(), occurrence_id=pk)
         serializer = OccurrencePatchSerializer(
@@ -89,7 +89,7 @@ def update_delete_get_occurrence(request, pk):
         else:
             return Response(
                 "Only superusers or creators allowed to delete occurrences",
-                status=status.HTTP_400_BAD_REQUEST,
+                status=status.HTTP_401_UNAUTHORIZED,
             )
     if request.method == "GET":
         occurrence = get_object_or_404(Occurrence.objects.all(), occurrence_id=pk)
@@ -227,7 +227,7 @@ def get_delete_user(request, pk):
         else:
             return Response(
                 "Only superusers allowed to delete other users",
-                status=status.HTTP_400_BAD_REQUEST,
+                status=status.HTTP_401_UNAUTHORIZED,
             )
     if request.method == "GET":
         user = get_object_or_404(User.objects.all(), id=pk)

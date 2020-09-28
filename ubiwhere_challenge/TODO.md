@@ -1,5 +1,3 @@
-# TODO: Postman collection -> DEFINIR VARIABLE DO TOKEN
-
 # TODO: Acabar test_views.py
 
 # TODO: Mudar para lat, long
