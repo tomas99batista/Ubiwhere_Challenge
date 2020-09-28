@@ -6,9 +6,9 @@
 
 # Table of Contents  
 - [Introduction](#Introduction)
-- [Installation](#Installation)
 - [Endpoints](#Endpoints)
 - [Initial Data](#Initial_Data)
+- [Installation](#Installation)
 - [Tests](#Tests)
 - [Documentation](#Documentation)
 - [Swagger](#Swagger)
@@ -20,20 +20,6 @@
 This challenge was proposed by [Ubiwhere](https://www.ubiwhere.com/) to their backend-dev position. 
 Developed in Python/Django, with the support of Django Rest Framework, JWT, Postgres + Postgis and Docker.
 It's an API to manage Occurrences.
-
-## Installation
-
-__Requirements to run__: Have `docker` & `docker-compose` installed. You will also need Postman in order to run the Collection I prepared.
-
-### Clone the repository
-Clone this repo to your local machine using https://github.com/tomas99batista/Ubiwhere_Challenge.git
-
-### Run containers
-`docker-compose up -d --build`
-
-### Clean containers
-`docker-compose down -v`
-
 
 ## Endpoints
 
@@ -111,18 +97,24 @@ Clone this repo to your local machine using https://github.com/tomas99batista/Ub
 - _Username_: 'userteste'
 - _Password_: 'userteste'
 
-## Tests
-There are 2 types of tests: tests to the Occurence model (`tests/test_models.py`) and to the API views (`tests/test_views.py`).
+## Installation
 
-## Documentation
-Available on `ubiwhere_challenge/docs/` there is documentation for the `models`, `serializers`, `views` and `urls`
+__Requirements to run__: Have `docker` & `docker-compose` installed.
+
+### Clone the repository
+Clone this repo to your local machine using https://github.com/tomas99batista/Ubiwhere_Challenge.git
+
+### Run containers
+`docker-compose up -d --build`
+
+### Clean containers
+`docker-compose down -v`
 
 ## Swagger
 There is an swagger available on `<ip_addr>:8000/swagger/`. 
 In order to test the endpoints (as a normal_user or as a super_user), you first must obtain the Auth Token by logging in (using the endpoint on Swagger) and then go to "Authorize", insert the the token, saving as: `Bearer <Token>`, as seen on image:
 
 ![Saving Auth Token](https://i.imgur.com/bK2SlLh.png)
-
 
 ## Postman
 With the docker-compose running you can now test the endpoints with the given collection of Postman.
@@ -132,6 +124,12 @@ __URL__: https://documenter.getpostman.com/view/9124304/TVKHVaue
 It's possible to select between 2 environments: `admin_environment`, where the user is a superuser and, therefore, can DELETE and PATCH; and `normal_user_environment`, where the access is limited to DELETE and PATCH.
 
 ![Postman](https://i.imgur.com/pdAQMnO.png)
+
+## Tests
+There are 2 types of tests: tests to the Occurence model (`tests/test_models.py`) and to the API views (`tests/test_views.py`).
+
+## Documentation
+Available on `ubiwhere_challenge/docs/` there is documentation for the `models`, `serializers`, `views` and `urls`
 
 ## CI
 There is an workflow checking if build state on every commit to master. It can be seen on https://github.com/tomas99batista/Ubiwhere_Challenge/actions
