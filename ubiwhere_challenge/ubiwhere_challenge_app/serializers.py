@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from .models import Occurrence
-from rest_framework_gis.serializers import GeoFeatureModelSerializer
 from django.contrib.auth.models import User
 
 # === Serializers for Occurrences and Users ===
@@ -8,14 +7,13 @@ from django.contrib.auth.models import User
 """
 The serializers are used to transform data into python readable to other format and vice-versa.
 We have 5 Serializers:
-"""
 
-"""
 **OccurrenceSerializer** - The main serializer of [[models.py#Occurrence]]
-"""
 
+"""
 
 class OccurrenceSerializer(serializers.ModelSerializer):
+
     """
     Takes in consideration all fields
     Used on:
@@ -47,6 +45,7 @@ class OccurrenceSerializer(serializers.ModelSerializer):
 
 
 class OccurrenceCreationSerializer(serializers.ModelSerializer):
+
     """
     Takes in consideration only the geo_field, description and category
     Used on:
@@ -66,6 +65,7 @@ class OccurrenceCreationSerializer(serializers.ModelSerializer):
 
 
 class OccurrencePatchSerializer(serializers.ModelSerializer):
+
     """
     Takes in consideration only the occurrence_id and the state, which is the field to update
     Used on:
@@ -85,6 +85,7 @@ class OccurrencePatchSerializer(serializers.ModelSerializer):
 
 
 class CreateUserSerializer(serializers.ModelSerializer):
+
     """
     Takes in consideration only the username and the password
     It's not possible to more than the superuser auto-created (admin)
@@ -118,6 +119,7 @@ class CreateUserSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
+    
     """
     Takes in consideration only the id, username and if is a superuser
     Used on:

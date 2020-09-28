@@ -32,14 +32,15 @@ We have 8 views:
 7. **Get/Delete User X** - GET/DELETE a given User [[views.py#get_delete_user]]
 8. **Index Page** - returns a webpage with a table to consult all endpoints, how to call, parameters, return and permissions [[views.py#index]]
 
+ === Add New Occurence ===
+
 """
 
-
-# === Add New Occurence ===
 @swagger_auto_schema(method="post", request_body=OccurrenceCreationSerializer)
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def add_new_occurrence(request):
+
     """
     View to add a new occurrence
     Only allowed to Authenticated Users, which will be the authors of the Occurence
@@ -57,6 +58,7 @@ def add_new_occurrence(request):
 @api_view(["PATCH", "DELETE", "GET"])
 @permission_classes([IsAuthenticated])
 def update_delete_get_occurrence(request, pk):
+
     """
     View where is possible to update, delete or get a given Occurrence, passing the
     primary key through the url
@@ -64,6 +66,7 @@ def update_delete_get_occurrence(request, pk):
     of the Occurrence are allowed to delete. Only superusers are authorized
     to update the Occurrence (and only the state is updatable)
     """
+
     if request.method == "PATCH":
         user = request.user
         if not user.is_superuser:
@@ -102,6 +105,7 @@ def update_delete_get_occurrence(request, pk):
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def filter_occurrences(request):
+
     """
     View where is possible to filter the Occurences pretended by:
 
@@ -111,6 +115,7 @@ def filter_occurrences(request):
 
     Only allowed to Authenticated Users
     """
+
     queryset = Occurrence.objects.all()
 
     # Filter by category
@@ -185,10 +190,12 @@ def filter_occurrences(request):
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def get_all_occurrences(request):
+
     """
     View where is possible to obtain all Occurrences
     Only allowed to Authenticated Users
     """
+
     queryset = Occurrence.objects.all()
     serializer = OccurrenceSerializer(queryset, many=True)
     return Response(serializer.data)
@@ -199,10 +206,12 @@ def get_all_occurrences(request):
 @api_view(["POST"])
 @permission_classes([AllowAny])
 def user_register(request):
+
     """
     View where is possible to register new Users
     Anyone can Post
     """
+
     serializer = CreateUserSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
@@ -214,10 +223,12 @@ def user_register(request):
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def retrieve_all_users(request):
+
     """
     View where is possible to retrieve all Users
     Only allowed to Authenticated Users
     """
+
     queryset = User.objects.all()
     serializer = UserSerializer(queryset, many=True)
     return Response(serializer.data)
@@ -227,11 +238,13 @@ def retrieve_all_users(request):
 @api_view(["GET", "DELETE"])
 @permission_classes([IsAuthenticated])
 def get_delete_user(request, pk):
+
     """
     View where is possible to Get/Delete the User which primary key is passed
     by URL
     Only allowed to Authenticated Users, but only SuperUsers can delete other Users
     """
+
     if request.method == "DELETE":
         user_request = request.user
         user_instance = get_object_or_404(User.objects.all(), id=pk)
@@ -253,8 +266,10 @@ def get_delete_user(request, pk):
 
 # === Index Page ===
 def index(request):
+
     """
     View that returns HTML page with a table showing the possible endpoints,
     URLS, methods allowed, parameters, return and permissions
     """
+    
     return render(request, "index.html")
