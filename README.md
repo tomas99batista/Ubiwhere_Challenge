@@ -27,7 +27,7 @@ It's an API to manage Occurrences.
 ### API Occurrence URLS
 
 - **POST**: Add Occurrence
-- **GET**: Get All Occurrences - If no filter are passed
+- **GET**: Get All Occurrences - If no filters are passed
 - **GET**: Filter Occurrences by author/caregory/distance to given point
 
   - `<ip_addr>:8000/api/occurrences/`
