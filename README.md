@@ -27,23 +27,18 @@ It's an API to manage Occurrences.
 ### API Occurrence URLS
 
 - **POST**: Add Occurrence
+- **GET**: Get All Occurrences - If no filter are passed
+- **GET**: Filter Occurrences by author/caregory/distance to given point
 
-  - `<ip_addr>:8000/api/occurrence/`
+  - `<ip_addr>:8000/api/occurrences/`
 
--   **PATCH**: Update state of Occurrence(occurrence_id=pk)
+- **PATCH**: Update state of Occurrence(occurrence_id=pk)
 - **DELETE**: Delete Occurrence(occurrence_id=pk)
 - **GET**: Get Occurrence(occurrence_id=pk)
 
-  - `<ip_addr>:8000/api/occurrence/<int:pk>/`
+  - `<ip_addr>:8000/api/occurrences/<int:pk>/`
 
-- **GET**: Filter Occurrences by author/caregory/distance to given point
-
-  - `<ip_addr>:8000/api/occurrence/filter/`
-
--   **GET**: Get All Occurrences
-  - `<ip_addr>:8000/api/occurrence/all/`
-
-### Auth URLS
+### User URLS
 
 -   **POST**: Login - Retrieves Auth Token
 
@@ -55,11 +50,11 @@ It's an API to manage Occurrences.
 
 - **GET**: Get All Users
 
-  - `<ip_addr>:8000/api/users/all/`
+  - `<ip_addr>:8000/api/users/`
 
 - **GET**: Get User by ID
 - **DELETE**: Delete User by ID
-  - `<ip_addr>:8000/api/user/<int:pk>/`
+  - `<ip_addr>:8000/api/users/<int:pk>/`
 
 ### Index (Endpoints table)
 
