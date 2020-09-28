@@ -38,7 +38,7 @@ It's an API to manage Occurrences.
 
   - `<ip_addr>:8000/api/occurrences/<int:pk>/`
 
-### User URLS
+### Auth URLS
 
 -   **POST**: Login - Retrieves Auth Token
 
@@ -47,6 +47,9 @@ It's an API to manage Occurrences.
 - **POST**: Register - Creates new User
 
   - `<ip_addr>:8000/api/register/`
+
+
+### User URLS
 
 - **GET**: Get All Users
 
