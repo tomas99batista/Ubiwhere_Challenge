@@ -70,7 +70,7 @@ class OccurrenceAPITest(APITestCase):
             {
                 "description": "Teste Add Occurrence",
                 "category": "Construction",
-                "longitude" : 40,
+                "longitude": 40,
                 "latitude": -7,
             },
             format="json",
@@ -85,7 +85,7 @@ class OccurrenceAPITest(APITestCase):
             {
                 "description": "Teste Add Occurrence",
                 "category": "Construction",
-                "longitude" : 40,
+                "longitude": 40,
                 "latitude": -7,
             },
             format="json",
@@ -104,7 +104,7 @@ class OccurrenceAPITest(APITestCase):
             {
                 "description": "Teste Add Occurrence",
                 "category": "Construction",
-                "longitude" : 40,
+                "longitude": 40,
                 "latitude": -7,
             },
             format="json",

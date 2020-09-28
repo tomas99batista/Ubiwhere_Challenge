@@ -36,8 +36,8 @@ class OccurrenceSerializer(serializers.ModelSerializer):
             "state",
             "category",
             "author",
-            "longitude", 
-            "latitude"
+            "longitude",
+            "latitude",
         )
 
 

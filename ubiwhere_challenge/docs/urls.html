@@ -21,8 +21,23 @@
     </div>
     <div class='code'>
       <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span>
+<span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">url</span>
 <span class="kn">from</span> <span class="nn">rest_framework_simplejwt</span> <span class="kn">import</span> <span class="n">views</span> <span class="k">as</span> <span class="n">jwt_views</span>
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">views</span></pre></div>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">views</span>
+
+<span class="kn">from</span> <span class="nn">rest_framework</span> <span class="kn">import</span> <span class="n">permissions</span>
+<span class="kn">from</span> <span class="nn">drf_yasg.views</span> <span class="kn">import</span> <span class="n">get_schema_view</span>
+<span class="kn">from</span> <span class="nn">drf_yasg</span> <span class="kn">import</span> <span class="n">openapi</span>
+
+
+<span class="n">schema_view</span> <span class="o">=</span> <span class="n">get_schema_view</span><span class="p">(</span>
+    <span class="n">openapi</span><span class="o">.</span><span class="n">Info</span><span class="p">(</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Occurrences API - Ubiwhere Challenge&quot;</span><span class="p">,</span>
+        <span class="n">default_version</span><span class="o">=</span><span class="s2">&quot;v1&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="n">public</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">permission_classes</span><span class="o">=</span><span class="p">(</span><span class="n">permissions</span><span class="o">.</span><span class="n">AllowAny</span><span class="p">,),</span>
+<span class="p">)</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -56,10 +71,11 @@ We have 9 urls:</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-3'>#</a>
       </div>
-      <p><strong>API URLS</strong> - The urls for the Occurrence  <a href="models.html#Occurrence">models.py</a></p>
+      <p><strong>API URLS</strong> - The urls for the Occurrence  <a href="models.html#Occurrence">models.py</a>
+- <strong>POST: Add Occurrence</strong> - Create a new Occurrence</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre></pre></div>
+      <div class="highlight"><pre>    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;api/occurrence/&quot;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">add_new_occurrence</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;add_new_occurrence&quot;</span><span class="p">),</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -67,20 +83,6 @@ We have 9 urls:</p>
     <div class='docs'>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-4'>#</a>
-      </div>
-      <ul>
-<li><strong>POST: Add Occurrence</strong> - Create a new Occurrence</li>
-</ul>
-    </div>
-    <div class='code'>
-      <div class="highlight"><pre>    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;api/occurrence/&quot;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">add_new_occurrence</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;add_new_occurrence&quot;</span><span class="p">),</span></pre></div>
-    </div>
-  </div>
-  <div class='clearall'></div>
-  <div class='section' id='section-5'>
-    <div class='docs'>
-      <div class='octowrap'>
-        <a class='octothorpe' href='#section-5'>#</a>
       </div>
       <ul>
 <li><strong>PATCH: Update one Occurrence</strong> - Updates the state of the Occurrence requested - Only Superusers</li>
@@ -97,10 +99,10 @@ We have 9 urls:</p>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-6'>
+  <div class='section' id='section-5'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-6'>#</a>
+        <a class='octothorpe' href='#section-5'>#</a>
       </div>
       <ul>
 <li><strong>GET: Filter Occurrences</strong> - Gets the Occurrences filtered by author/caregory/distance to given point</li>
@@ -111,10 +113,10 @@ We have 9 urls:</p>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-7'>
+  <div class='section' id='section-6'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-7'>#</a>
+        <a class='octothorpe' href='#section-6'>#</a>
       </div>
       <ul>
 <li><strong>GET: Get All Occurrences</strong> - Retrieves all Occurrences</li>
@@ -125,36 +127,23 @@ We have 9 urls:</p>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-8'>
+  <div class='section' id='section-7'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-8'>#</a>
+        <a class='octothorpe' href='#section-7'>#</a>
       </div>
-      <p><strong>AUTH URLS</strong> - The urls for the User (author  <a href="models.html#Occurrence">models.py</a>)</p>
-    </div>
-    <div class='code'>
-      <div class="highlight"><pre></pre></div>
-    </div>
-  </div>
-  <div class='clearall'></div>
-  <div class='section' id='section-9'>
-    <div class='docs'>
-      <div class='octowrap'>
-        <a class='octothorpe' href='#section-9'>#</a>
-      </div>
-      <ul>
-<li><strong>POST: Login</strong> - Retrieves Auth Token</li>
-</ul>
+      <p><strong>AUTH URLS</strong> - The urls for the User (author  <a href="models.html#Occurrence">models.py</a>)
+- <strong>POST: Login</strong> - Retrieves Auth Token</p>
     </div>
     <div class='code'>
       <div class="highlight"><pre>    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;api/login/&quot;</span><span class="p">,</span> <span class="n">jwt_views</span><span class="o">.</span><span class="n">TokenObtainPairView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;login&quot;</span><span class="p">),</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-10'>
+  <div class='section' id='section-8'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-10'>#</a>
+        <a class='octothorpe' href='#section-8'>#</a>
       </div>
       <ul>
 <li><strong>POST: Register</strong> - Register new User</li>
@@ -165,24 +154,24 @@ We have 9 urls:</p>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-11'>
+  <div class='section' id='section-9'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-11'>#</a>
+        <a class='octothorpe' href='#section-9'>#</a>
       </div>
       <ul>
 <li><strong>GET: Get All Users</strong> - Retrieves all Users</li>
 </ul>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;api/users/&quot;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">retrieve_all_users</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;retrieve_all_users&quot;</span><span class="p">),</span></pre></div>
+      <div class="highlight"><pre>    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;api/user/all/&quot;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">retrieve_all_users</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;retrieve_all_users&quot;</span><span class="p">),</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-12'>
+  <div class='section' id='section-10'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-12'>#</a>
+        <a class='octothorpe' href='#section-10'>#</a>
       </div>
       <ul>
 <li><strong>GET: Get User By ID</strong> - Retrieves requested User</li>
@@ -194,15 +183,39 @@ We have 9 urls:</p>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-13'>
+  <div class='section' id='section-11'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-13'>#</a>
+        <a class='octothorpe' href='#section-11'>#</a>
       </div>
       <p><strong>TEMPLATE URLS</strong> - The URLS for HTML pages</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;index&quot;</span><span class="p">),</span>
+      <div class="highlight"><pre>    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;index&quot;</span><span class="p">),</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-12'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-12'>#</a>
+      </div>
+      <p>Swagger URLS</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="n">url</span><span class="p">(</span>
+        <span class="sa">r</span><span class="s2">&quot;^swagger(?P&lt;format&gt;\.json|\.yaml)$&quot;</span><span class="p">,</span>
+        <span class="n">schema_view</span><span class="o">.</span><span class="n">without_ui</span><span class="p">(</span><span class="n">cache_timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;schema-json&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="n">url</span><span class="p">(</span>
+        <span class="sa">r</span><span class="s2">&quot;^swagger/$&quot;</span><span class="p">,</span>
+        <span class="n">schema_view</span><span class="o">.</span><span class="n">with_ui</span><span class="p">(</span><span class="s2">&quot;swagger&quot;</span><span class="p">,</span> <span class="n">cache_timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;schema-swagger-ui&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="n">url</span><span class="p">(</span>
+        <span class="sa">r</span><span class="s2">&quot;^redoc/$&quot;</span><span class="p">,</span> <span class="n">schema_view</span><span class="o">.</span><span class="n">with_ui</span><span class="p">(</span><span class="s2">&quot;redoc&quot;</span><span class="p">,</span> <span class="n">cache_timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;schema-redoc&quot;</span>
+    <span class="p">),</span>
 <span class="p">]</span>
 
 </pre></div>

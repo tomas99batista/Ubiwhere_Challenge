@@ -60,7 +60,7 @@ We have 5 Serializers:</p>
       <p><strong>OccurrenceSerializer</strong> - The main serializer of  <a href="models.html#Occurrence">models.py</a></p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="k">class</span> <span class="nc">OccurrenceSerializer</span><span class="p">(</span><span class="n">GeoFeatureModelSerializer</span><span class="p">):</span></pre></div>
+      <div class="highlight"><pre></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -78,18 +78,7 @@ Used on:</p>
 </ul>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
-        <span class="n">model</span> <span class="o">=</span> <span class="n">Occurrence</span>
-        <span class="n">geo_field</span> <span class="o">=</span> <span class="s2">&quot;geographic_location&quot;</span>
-        <span class="n">fields</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="s2">&quot;occurrence_id&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;description&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;creation_timestamp&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;update_timestamp&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;state&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;author&quot;</span><span class="p">,</span>
-        <span class="p">)</span></pre></div>
+      <div class="highlight"><pre><span class="k">class</span> <span class="nc">OccurrenceSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -98,10 +87,10 @@ Used on:</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-5'>#</a>
       </div>
-      <p><strong>OccurrenceCreationSerializer</strong> - The serializer for creating Occurrences  <a href="models.html#Occurrence">models.py</a></p>
+      
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="k">class</span> <span class="nc">OccurrenceCreationSerializer</span><span class="p">(</span><span class="n">GeoFeatureModelSerializer</span><span class="p">):</span></pre></div>
+      <div class="highlight"><pre></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -110,17 +99,22 @@ Used on:</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-6'>#</a>
       </div>
-      <p>Takes in consideration only the geo_field, description and category
-Used on:</p>
-<ul>
-<li><a href="views.html#add_new_occurrence">views.py</a> on POST to serialize the Occurrence sent to be created</li>
-</ul>
+      <p><strong>OccurrenceCreationSerializer</strong> - The serializer for creating Occurrences  <a href="models.html#Occurrence">models.py</a></p>
     </div>
     <div class='code'>
       <div class="highlight"><pre>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">Occurrence</span>
-        <span class="n">geo_field</span> <span class="o">=</span> <span class="s2">&quot;geographic_location&quot;</span>
-        <span class="n">fields</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="s2">&quot;category&quot;</span><span class="p">)</span></pre></div>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;occurrence_id&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;creation_timestamp&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;update_timestamp&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;state&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;category&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;author&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;longitude&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;latitude&quot;</span><span class="p">,</span>
+        <span class="p">)</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -129,10 +123,10 @@ Used on:</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-7'>#</a>
       </div>
-      <p><strong>OccurrencePatchSerializer</strong> - The serializer for updating the state of the Occurrences  <a href="models.html#Occurrence">models.py</a></p>
+      
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="k">class</span> <span class="nc">OccurrencePatchSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span></pre></div>
+      <div class="highlight"><pre></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -141,16 +135,14 @@ Used on:</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-8'>#</a>
       </div>
-      <p>Takes in consideration only the occurrence_id and the state, which is the field to update
+      <p>Takes in consideration only the geo_field, description and category
 Used on:</p>
 <ul>
-<li><a href="views.html#update_delete_get_occurrence">views.py</a> on POST to serialize the updated Occurrence object</li>
+<li><a href="views.html#add_new_occurrence">views.py</a> on POST to serialize the Occurrence sent to be created</li>
 </ul>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
-        <span class="n">model</span> <span class="o">=</span> <span class="n">Occurrence</span>
-        <span class="n">fields</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;occurrence_id&quot;</span><span class="p">,</span> <span class="s2">&quot;state&quot;</span><span class="p">)</span></pre></div>
+      <div class="highlight"><pre><span class="k">class</span> <span class="nc">OccurrenceCreationSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -159,10 +151,10 @@ Used on:</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-9'>#</a>
       </div>
-      <p><strong>CreateUserSerializer</strong> - The serializer for creating the authors of  <a href="models.html#Occurrence">models.py</a></p>
+      
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="k">class</span> <span class="nc">CreateUserSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span></pre></div>
+      <div class="highlight"><pre></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -171,12 +163,116 @@ Used on:</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-10'>#</a>
       </div>
+      <p><strong>OccurrencePatchSerializer</strong> - The serializer for updating the state of the Occurrences  <a href="models.html#Occurrence">models.py</a></p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Occurrence</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="s2">&quot;category&quot;</span><span class="p">,</span> <span class="s2">&quot;longitude&quot;</span><span class="p">,</span> <span class="s2">&quot;latitude&quot;</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-11'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-11'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-12'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-12'>#</a>
+      </div>
+      <p>Takes in consideration only the occurrence_id and the state, which is the field to update
+Used on:</p>
+<ul>
+<li><a href="views.html#update_delete_get_occurrence">views.py</a> on POST to serialize the updated Occurrence object</li>
+</ul>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">class</span> <span class="nc">OccurrencePatchSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-13'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-13'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-14'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-14'>#</a>
+      </div>
+      <p><strong>CreateUserSerializer</strong> - The serializer for creating the authors of  <a href="models.html#Occurrence">models.py</a></p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Occurrence</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;occurrence_id&quot;</span><span class="p">,</span> <span class="s2">&quot;state&quot;</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-15'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-15'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-16'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-16'>#</a>
+      </div>
       <p>Takes in consideration only the username and the password
 It&rsquo;s not possible to more than the superuser auto-created (admin)
 Used on:</p>
 <ul>
-<li><a href="views.html#user_register">views.py</a> on POST to serialize the new User </li>
+<li><a href="views.html#user_register">views.py</a> on POST to serialize the new User</li>
 </ul>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">class</span> <span class="nc">CreateUserSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-17'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-17'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-18'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-18'>#</a>
+      </div>
+      
     </div>
     <div class='code'>
       <div class="highlight"><pre>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
@@ -189,10 +285,10 @@ Used on:</p>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-11'>
+  <div class='section' id='section-19'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-11'>#</a>
+        <a class='octothorpe' href='#section-19'>#</a>
       </div>
       <p><strong>UserSerializer</strong> - The main serializer of the authors of  <a href="models.html#Occurrence">models.py</a></p>
     </div>
@@ -208,10 +304,22 @@ Used on:</p>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-12'>
+  <div class='section' id='section-20'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-12'>#</a>
+        <a class='octothorpe' href='#section-20'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-21'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-21'>#</a>
       </div>
       <p>Takes in consideration only the id, username and if is a superuser
 Used on:</p>
@@ -225,10 +333,22 @@ Used on:</p>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-13'>
+  <div class='section' id='section-22'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-13'>#</a>
+        <a class='octothorpe' href='#section-22'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-23'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-23'>#</a>
       </div>
       
     </div>

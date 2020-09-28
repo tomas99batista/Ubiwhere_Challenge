@@ -32,25 +32,23 @@ We have 8 views:</p>
     </div>
     <div class='code'>
       <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span>
-<span class="kn">from</span> <span class="nn">rest_framework.decorators</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">api_view</span><span class="p">,</span>
-    <span class="n">permission_classes</span>
-<span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">rest_framework.decorators</span> <span class="kn">import</span> <span class="n">api_view</span><span class="p">,</span> <span class="n">permission_classes</span>
 <span class="kn">from</span> <span class="nn">rest_framework</span> <span class="kn">import</span> <span class="n">status</span>
 <span class="kn">from</span> <span class="nn">rest_framework.response</span> <span class="kn">import</span> <span class="n">Response</span>
+<span class="kn">from</span> <span class="nn">rest_framework.permissions</span> <span class="kn">import</span> <span class="n">IsAuthenticated</span><span class="p">,</span> <span class="n">AllowAny</span>
+<span class="kn">from</span> <span class="nn">drf_yasg.utils</span> <span class="kn">import</span> <span class="n">swagger_auto_schema</span>
+
 <span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">get_object_or_404</span>
 <span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span>
 <span class="kn">from</span> <span class="nn">django.contrib.gis.geos</span> <span class="kn">import</span> <span class="n">GEOSGeometry</span>
+
 <span class="kn">from</span> <span class="nn">.serializers</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">OccurrenceCreationSerializer</span><span class="p">,</span>
     <span class="n">CreateUserSerializer</span><span class="p">,</span>
     <span class="n">UserSerializer</span><span class="p">,</span>
     <span class="n">OccurrenceSerializer</span><span class="p">,</span>
     <span class="n">OccurrencePatchSerializer</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="kn">from</span> <span class="nn">rest_framework.permissions</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">IsAuthenticated</span><span class="p">,</span>
-    <span class="n">AllowAny</span>
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Occurrence</span></pre></div>
     </div>
@@ -76,7 +74,8 @@ We have 8 views:</p>
       <h3><span id="add-new-occurence" href="add-new-occurence"> Add New Occurence </span></h3>
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="nd">@api_view</span><span class="p">([</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
+      <div class="highlight"><pre><span class="nd">@swagger_auto_schema</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;post&quot;</span><span class="p">,</span> <span class="n">request_body</span><span class="o">=</span><span class="n">OccurrenceCreationSerializer</span><span class="p">)</span>
+<span class="nd">@api_view</span><span class="p">([</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
 <span class="nd">@permission_classes</span><span class="p">([</span><span class="n">IsAuthenticated</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">add_new_occurrence</span><span class="p">(</span><span class="n">request</span><span class="p">):</span></pre></div>
     </div>
@@ -108,7 +107,8 @@ Only allowed to Authenticated Users, which will be the authors of the Occurence<
       <h3><span id="update/delete/get-occurence-x" href="update/delete/get-occurence-x"> Update/Delete/Get Occurence X </span></h3>
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="nd">@api_view</span><span class="p">([</span><span class="s2">&quot;PATCH&quot;</span><span class="p">,</span> <span class="s2">&quot;DELETE&quot;</span><span class="p">,</span> <span class="s2">&quot;GET&quot;</span><span class="p">])</span>
+      <div class="highlight"><pre><span class="nd">@swagger_auto_schema</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;patch&quot;</span><span class="p">,</span> <span class="n">request_body</span><span class="o">=</span><span class="n">OccurrencePatchSerializer</span><span class="p">)</span>
+<span class="nd">@api_view</span><span class="p">([</span><span class="s2">&quot;PATCH&quot;</span><span class="p">,</span> <span class="s2">&quot;DELETE&quot;</span><span class="p">,</span> <span class="s2">&quot;GET&quot;</span><span class="p">])</span>
 <span class="nd">@permission_classes</span><span class="p">([</span><span class="n">IsAuthenticated</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">update_delete_get_occurrence</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="p">):</span></pre></div>
     </div>
@@ -120,7 +120,7 @@ Only allowed to Authenticated Users, which will be the authors of the Occurence<
         <a class='octothorpe' href='#section-5'>#</a>
       </div>
       <p>View where is possible to update, delete or get a given Occurrence, passing the
-primary key through the url 
+primary key through the url
 Only allowed to Authenticated Users. Only superusers or the authors
 of the Occurrence are allowed to delete. Only superusers are authorized
 to update the Occurrence (and only the state is updatable)</p>
@@ -131,7 +131,7 @@ to update the Occurrence (and only the state is updatable)</p>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">user</span><span class="o">.</span><span class="n">is_superuser</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
                 <span class="s2">&quot;Only superusers are allowed to update occurrences&quot;</span><span class="p">,</span>
-                <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_400_BAD_REQUEST</span><span class="p">,</span>
+                <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_401_UNAUTHORIZED</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="n">occurrence</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Occurrence</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">(),</span> <span class="n">occurrence_id</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span>
         <span class="n">serializer</span> <span class="o">=</span> <span class="n">OccurrencePatchSerializer</span><span class="p">(</span>
@@ -161,7 +161,7 @@ to update the Occurrence (and only the state is updatable)</p>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
                 <span class="s2">&quot;Only superusers or creators allowed to delete occurrences&quot;</span><span class="p">,</span>
-                <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_400_BAD_REQUEST</span><span class="p">,</span>
+                <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_401_UNAUTHORIZED</span><span class="p">,</span>
             <span class="p">)</span>
     <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;GET&quot;</span><span class="p">:</span>
         <span class="n">occurrence</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Occurrence</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">(),</span> <span class="n">occurrence_id</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span>
@@ -282,7 +282,7 @@ an bad request error is generated</p>
       <p>Create a point from the given longitude and latitude</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>        <span class="n">point</span> <span class="o">=</span> <span class="n">GEOSGeometry</span><span class="p">(</span>
+      <div class="highlight"><pre>        <span class="n">point_request</span> <span class="o">=</span> <span class="n">GEOSGeometry</span><span class="p">(</span>
             <span class="s2">&quot;POINT(&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">longitude</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">latitude</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;)&quot;</span><span class="p">,</span> <span class="n">srid</span><span class="o">=</span><span class="mi">4326</span>
         <span class="p">)</span>
         <span class="k">for</span> <span class="n">occurrence</span> <span class="ow">in</span> <span class="n">queryset</span><span class="p">:</span></pre></div>
@@ -294,10 +294,17 @@ an bad request error is generated</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-15'>#</a>
       </div>
-      <p>Calculate the distance from the stored point to the given point</p>
+      <p>Creates Point with the help of GEOS</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>            <span class="n">distance</span> <span class="o">=</span> <span class="n">occurrence</span><span class="o">.</span><span class="n">geographic_location</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">point</span><span class="p">)</span></pre></div>
+      <div class="highlight"><pre>            <span class="n">point_database</span> <span class="o">=</span> <span class="n">GEOSGeometry</span><span class="p">(</span>
+                <span class="s2">&quot;POINT(&quot;</span>
+                <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">occurrence</span><span class="o">.</span><span class="n">longitude</span><span class="p">)</span>
+                <span class="o">+</span> <span class="s2">&quot; &quot;</span>
+                <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">occurrence</span><span class="o">.</span><span class="n">latitude</span><span class="p">)</span>
+                <span class="o">+</span> <span class="s2">&quot;)&quot;</span><span class="p">,</span>
+                <span class="n">srid</span><span class="o">=</span><span class="mi">4326</span><span class="p">,</span>
+            <span class="p">)</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -305,6 +312,18 @@ an bad request error is generated</p>
     <div class='docs'>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-16'>#</a>
+      </div>
+      <p>Calculate the distance from the stored point to the given point</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>            <span class="n">distance</span> <span class="o">=</span> <span class="n">point_database</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">point_request</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-17'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-17'>#</a>
       </div>
       <p>If the distance from the given point to the stored point is bigger than the distance passed, exclude that point</p>
     </div>
@@ -317,15 +336,21 @@ an bad request error is generated</p>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-17'>
+  <div class='section' id='section-18'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-17'>#</a>
+        <a class='octothorpe' href='#section-18'>#</a>
       </div>
       <p>If no type of filter (category, distance or author) is passed.</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">category</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">latitude</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">longitude</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">distance_range</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">username</span><span class="p">):</span>
+      <div class="highlight"><pre>    <span class="k">if</span> <span class="p">(</span>
+        <span class="ow">not</span> <span class="n">category</span>
+        <span class="ow">and</span> <span class="ow">not</span> <span class="n">latitude</span>
+        <span class="ow">and</span> <span class="ow">not</span> <span class="n">longitude</span>
+        <span class="ow">and</span> <span class="ow">not</span> <span class="n">distance_range</span>
+        <span class="ow">and</span> <span class="ow">not</span> <span class="n">username</span>
+    <span class="p">):</span>
         <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
             <span class="s2">&quot;BAD REQUEST: You need to pass at least one type of filter.&quot;</span><span class="p">,</span>
             <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_400_BAD_REQUEST</span><span class="p">,</span>
@@ -341,10 +366,10 @@ an bad request error is generated</p>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-18'>
+  <div class='section' id='section-19'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-18'>#</a>
+        <a class='octothorpe' href='#section-19'>#</a>
       </div>
       <h3><span id="get-all-occurences" href="get-all-occurences"> Get All Occurences </span></h3>
     </div>
@@ -355,10 +380,10 @@ an bad request error is generated</p>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-19'>
+  <div class='section' id='section-20'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-19'>#</a>
+        <a class='octothorpe' href='#section-20'>#</a>
       </div>
       <p>View where is possible to obtain all Occurrences
 Only allowed to Authenticated Users</p>
@@ -370,24 +395,25 @@ Only allowed to Authenticated Users</p>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-20'>
+  <div class='section' id='section-21'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-20'>#</a>
+        <a class='octothorpe' href='#section-21'>#</a>
       </div>
       <h3><span id="register-user" href="register-user"> Register User </span></h3>
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="nd">@api_view</span><span class="p">([</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
+      <div class="highlight"><pre><span class="nd">@swagger_auto_schema</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;post&quot;</span><span class="p">,</span> <span class="n">request_body</span><span class="o">=</span><span class="n">CreateUserSerializer</span><span class="p">)</span>
+<span class="nd">@api_view</span><span class="p">([</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
 <span class="nd">@permission_classes</span><span class="p">([</span><span class="n">AllowAny</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">user_register</span><span class="p">(</span><span class="n">request</span><span class="p">):</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-21'>
+  <div class='section' id='section-22'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-21'>#</a>
+        <a class='octothorpe' href='#section-22'>#</a>
       </div>
       <p>View where is possible to register new Users
 Anyone can Post</p>
@@ -401,10 +427,10 @@ Anyone can Post</p>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-22'>
+  <div class='section' id='section-23'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-22'>#</a>
+        <a class='octothorpe' href='#section-23'>#</a>
       </div>
       <h3><span id="get-all-users" href="get-all-users"> Get All Users </span></h3>
     </div>
@@ -415,10 +441,10 @@ Anyone can Post</p>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-23'>
+  <div class='section' id='section-24'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-23'>#</a>
+        <a class='octothorpe' href='#section-24'>#</a>
       </div>
       <p>View where is possible to retrieve all Users
 Only allowed to Authenticated Users</p>
@@ -430,10 +456,10 @@ Only allowed to Authenticated Users</p>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-24'>
+  <div class='section' id='section-25'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-24'>#</a>
+        <a class='octothorpe' href='#section-25'>#</a>
       </div>
       <h3><span id="get/delete-user-x" href="get/delete-user-x"> Get/Delete User X </span></h3>
     </div>
@@ -444,10 +470,10 @@ Only allowed to Authenticated Users</p>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-25'>
+  <div class='section' id='section-26'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-25'>#</a>
+        <a class='octothorpe' href='#section-26'>#</a>
       </div>
       <p>View where is possible to Get/Delete the User which primary key is passed
 by URL
@@ -460,10 +486,10 @@ Only allowed to Authenticated Users, but only SuperUsers can delete other Users<
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-26'>
+  <div class='section' id='section-27'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-26'>#</a>
+        <a class='octothorpe' href='#section-27'>#</a>
       </div>
       <p>Superuser or author can delete instance</p>
     </div>
@@ -474,7 +500,7 @@ Only allowed to Authenticated Users, but only SuperUsers can delete other Users<
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
                 <span class="s2">&quot;Only superusers allowed to delete other users&quot;</span><span class="p">,</span>
-                <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_400_BAD_REQUEST</span><span class="p">,</span>
+                <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_401_UNAUTHORIZED</span><span class="p">,</span>
             <span class="p">)</span>
     <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;GET&quot;</span><span class="p">:</span>
         <span class="n">user</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">(),</span> <span class="nb">id</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span>
@@ -484,10 +510,10 @@ Only allowed to Authenticated Users, but only SuperUsers can delete other Users<
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-27'>
+  <div class='section' id='section-28'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-27'>#</a>
+        <a class='octothorpe' href='#section-28'>#</a>
       </div>
       <h3><span id="index-page" href="index-page"> Index Page </span></h3>
     </div>
@@ -496,10 +522,10 @@ Only allowed to Authenticated Users, but only SuperUsers can delete other Users<
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-28'>
+  <div class='section' id='section-29'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-28'>#</a>
+        <a class='octothorpe' href='#section-29'>#</a>
       </div>
       <p>View that returns HTML page with a table showing the possible endpoints,
 URLS, methods allowed, parameters, return and permissions</p>
