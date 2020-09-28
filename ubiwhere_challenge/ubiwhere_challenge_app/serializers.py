@@ -11,7 +11,6 @@ We have 5 Serializers:
 **OccurrenceSerializer** - The main serializer of [[models.py#Occurrence]]
 
 """
-
 class OccurrenceSerializer(serializers.ModelSerializer):
 
     """

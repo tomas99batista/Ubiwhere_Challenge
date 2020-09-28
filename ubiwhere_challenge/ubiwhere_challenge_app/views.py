@@ -35,13 +35,13 @@ We have 8 views:
  === Add New Occurence ===
 
 """
-
 @swagger_auto_schema(method="post", request_body=OccurrenceCreationSerializer)
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def add_new_occurrence(request):
 
     """
+   
     View to add a new occurrence
     Only allowed to Authenticated Users, which will be the authors of the Occurence
     """
@@ -60,6 +60,7 @@ def add_new_occurrence(request):
 def update_delete_get_occurrence(request, pk):
 
     """
+
     View where is possible to update, delete or get a given Occurrence, passing the
     primary key through the url
     Only allowed to Authenticated Users. Only superusers or the authors
@@ -107,6 +108,7 @@ def update_delete_get_occurrence(request, pk):
 def filter_occurrences(request):
 
     """
+
     View where is possible to filter the Occurences pretended by:
 
     - author: passing the username
@@ -179,6 +181,7 @@ def filter_occurrences(request):
 def get_all_occurrences(request):
 
     """
+
     View where is possible to obtain all Occurrences
     Only allowed to Authenticated Users
     """
@@ -195,6 +198,7 @@ def get_all_occurrences(request):
 def user_register(request):
 
     """
+
     View where is possible to register new Users
     Anyone can Post
     """
@@ -212,6 +216,7 @@ def user_register(request):
 def retrieve_all_users(request):
 
     """
+
     View where is possible to retrieve all Users
     Only allowed to Authenticated Users
     """
@@ -227,6 +232,7 @@ def retrieve_all_users(request):
 def get_delete_user(request, pk):
 
     """
+
     View where is possible to Get/Delete the User which primary key is passed
     by URL
     Only allowed to Authenticated Users, but only SuperUsers can delete other Users
@@ -255,6 +261,7 @@ def get_delete_user(request, pk):
 def index(request):
 
     """
+    
     View that returns HTML page with a table showing the possible endpoints,
     URLS, methods allowed, parameters, return and permissions
     """

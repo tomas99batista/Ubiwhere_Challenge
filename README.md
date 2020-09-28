@@ -12,8 +12,8 @@
 -  [Tests](#Tests)
 -  [Documentation](#Documentation)
 -  [Swagger](#Swagger)
--  [Postman Collection](#Postman)
--  [Continuous Integration](#CI)
+-    [Postman Collection](#Postman)
+-    [Continuous Integration](#CI)
 -  [Author](#Author)
 
 ## Introduction
@@ -30,7 +30,7 @@ It's an API to manage Occurrences.
 
   - `<ip_addr>:8000/api/occurrence/`
 
-- **PATCH**: Update state of Occurrence(occurrence_id=pk)
+-   **PATCH**: Update state of Occurrence(occurrence_id=pk)
 - **DELETE**: Delete Occurrence(occurrence_id=pk)
 - **GET**: Get Occurrence(occurrence_id=pk)
 
@@ -40,12 +40,12 @@ It's an API to manage Occurrences.
 
   - `<ip_addr>:8000/api/occurrence/filter/`
 
-- **GET**: Get All Occurrences
+-   **GET**: Get All Occurrences
   - `<ip_addr>:8000/api/occurrence/all/`
 
 ### Auth URLS
 
-- **POST**: Login - Retrieves Auth Token
+-   **POST**: Login - Retrieves Auth Token
 
   - `<ip_addr>:8000/api/login/`
 
