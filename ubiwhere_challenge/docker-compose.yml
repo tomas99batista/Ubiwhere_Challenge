@@ -4,10 +4,10 @@ services:
     web:
         build: 
             context: .
-        command: gunicorn ubiwhere_challenge.wsgi:application --bind 0.0.0.0:8000
+        command: python manage.py runserver 0.0.0.0:8000
         volumes: 
             - .//:/usr/src/app
-        ports: 
+        ports:
             - 8000:8000
         env_file: 
             - ./.env.dev
@@ -25,4 +25,3 @@ services:
 
 volumes:
     postgres_data: 
-        
