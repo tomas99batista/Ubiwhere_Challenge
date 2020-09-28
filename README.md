@@ -18,7 +18,7 @@
 
 ## Introduction
 
-This challenge was proposed by [Ubiwhere](https://www.ubiwhere.com/) to their backend-dev position.
+This challenge was proposed by [Ubiwhere](https://www.ubiwhere.com/) for their backend-dev position.
 Developed in Python/Django, with the support of Django Rest Framework, JWT, Postgres + Postgis and Docker.
 It's an API to manage Occurrences.
 
@@ -27,23 +27,18 @@ It's an API to manage Occurrences.
 ### API Occurrence URLS
 
 - **POST**: Add Occurrence
+- **GET**: Get All Occurrences - If no filters are passed
+- **GET**: Filter Occurrences by author/caregory/distance to given point
 
-  - `<ip_addr>:8000/api/occurrence/`
+  - `<ip_addr>:8000/api/occurrences/`
 
--   **PATCH**: Update state of Occurrence(occurrence_id=pk)
+- **PATCH**: Update state of Occurrence(occurrence_id=pk)
 - **DELETE**: Delete Occurrence(occurrence_id=pk)
 - **GET**: Get Occurrence(occurrence_id=pk)
 
-  - `<ip_addr>:8000/api/occurrence/<int:pk>/`
+  - `<ip_addr>:8000/api/occurrences/<int:pk>/`
 
-- **GET**: Filter Occurrences by author/caregory/distance to given point
-
-  - `<ip_addr>:8000/api/occurrence/filter/`
-
--   **GET**: Get All Occurrences
-  - `<ip_addr>:8000/api/occurrence/all/`
-
-### Auth URLS
+### User URLS
 
 -   **POST**: Login - Retrieves Auth Token
 
@@ -55,16 +50,16 @@ It's an API to manage Occurrences.
 
 - **GET**: Get All Users
 
-  - `<ip_addr>:8000/api/users/all/`
+  - `<ip_addr>:8000/api/users/`
 
 - **GET**: Get User by ID
 - **DELETE**: Delete User by ID
-  - `<ip_addr>:8000/api/user/<int:pk>/`
+  - `<ip_addr>:8000/api/users/<int:pk>/`
 
 ### Index (Endpoints table)
 
 - `<ip_addr>:8000/`
-  ![EndPoints](https://i.imgur.com/jqPmvPY.png)
+  ![EndPoints](https://i.imgur.com/ayIHvT1.png)
 
 ## Initial_Data
 
