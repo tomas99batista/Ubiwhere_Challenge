@@ -40,12 +40,10 @@ It's an API to manage Occurrences.
 
 ### Auth URLS
 
--   **POST**: Login - Retrieves Auth Token
-
+- **POST**: Login - Retrieves Auth Token
   - `<ip_addr>:8000/api/login/`
 
 - **POST**: Register - Creates new User
-
   - `<ip_addr>:8000/api/register/`
 
 
