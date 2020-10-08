@@ -1,5 +1,5 @@
-Django
-djangorestframework
+Django==3.1.2
+djangorestframework==3.11.2
 djangorestframework-gis
 djangorestframework_simplejwt
 django-filter
